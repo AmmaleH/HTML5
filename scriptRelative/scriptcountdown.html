@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            width: 100px;
+            height: 60px;
+            background-color: #000;
+            padding-right: 10px;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- //计时器 -->
+    <div>
+        <span class='hour'>1</span>
+        <span class='minute'>2</span>
+        <span class='second'>3</span>
+    </div>
+    <script>
+        var span1 = document.querySelector('.hour');
+        // var span2 = document.querySelector('.minute');
+        // var span3 = document.querySelector('.second');
+        var span2 = span1.nextElementSibling;
+        var span3 = span2.nextElementSibling;
+        var inputTime = +new Date('2021-02-25 23:00:00');   //获取用户输入时间的总毫秒数
+        countDown();    //防止刷新时盒子中会有空白
+        setInterval(countDown, 1000);
+        function countDown() {
+            var currentTime = +new Date();  //当前时间的总毫秒数
+            var times = (inputTime - currentTime) / 1000;
+            var h = parseInt(times / 60 / 60);  //时
+            h = h < 10 ? '0' + h : h;
+            span1.innerHTML = h;
+            var m = parseInt(times / 60 % 60);  //分
+            m = m < 10 ? '0' + m : m;
+            span2.innerHTML = m;
+            var s = parseInt(times % 60);  //秒
+            s = s < 10 ? '0' + s : s;
+            span3.innerHTML = s;
+        }
+
+    </script>
+</body>
+
+</html>

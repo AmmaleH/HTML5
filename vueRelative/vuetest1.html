@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue基础1</title>
+</head>
+
+<body>
+    <div id="test">
+        <!-- v-text 、v-html会把标签里面的内容全部替换 -->
+        <div v-text="message1 + '!!!'" id="first">
+            <div>hello</div>
+        </div>
+        <div v-html="message2">hello</div>
+        <!-- {{}} 只会替换 {{}} 里面的内容 -->
+        <div>{{modelMsg}}</div>
+
+        <!-- v-bind用于属性的绑定,替换的是bindClass的值 -->
+        <!-- 缩写可写为   :class = "bindClass" 即去掉v-bind -->
+        <!-- bindClass可以执行基本运算、函数，支持多种数据类型（数组、对象） -->
+        <div v-bind:class="bindClass">v-bind用于属性的绑定</div>
+
+        <!-- v-model用于在表单<input>、<textarea>元素中创建双向数据绑定 -->
+        <!-- v-model 会忽略所有表单元素的 value、checked、selected 特性
+            的初始值而总是将 Vue 实例的数据作为数据来源。 -->
+        <input type="text" v-model="modelMsg" placeholder="写点啥子" />
+
+        <!-- v-on可绑定事件，全称与简写两种写法如下 -->
+        <input type="button" value="v-on指令" v-on:click="fn">
+        <input type="button" value="v-on简写" @click="fn">
+        <input type="button" value="双击" @dblclick="fn">
+
+        <div>
+            <button @click="sub">-</button>
+            <span>{{num}}</span>
+            <button v-on:click="add" style="width:120px">+</button>
+        </div>
+
+
+        <button @click="changeShow">显示/隐藏图片</button>
+        <img style="width:400px" v-show="isShow" @click="changeShow" src="../images/wangzhe.jpg" alt="汽车">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#test",
+            data: {
+                message1: "干就完了chongchongchong",
+                message2: "<a href='http://www.baidu.com'>hello</a>",
+                message3: "淦",
+                bindClass: "bindIndex",
+                modelMsg: "啥也不写",
+                num: 0,
+                isShow: true
+            },
+            methods: {
+                fn: function () {
+                    alert("冲鸭");
+                },
+                sub: function () {
+                    if (this.num > 0) this.num--;
+                    else alert("不能小于0");
+                },
+                add: function () {
+                    this.num++;
+                },
+                changeShow: function () {
+                    this.isShow = !this.isShow;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

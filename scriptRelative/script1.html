@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            color: #999;
+        }
+
+        .change {
+            background-color: hotpink;
+
+        }
+
+        .register {
+            width: 600px;
+            margin: 100px auto;
+        }
+
+        .message {
+            display: inline-block;
+            font-size: 12px;
+            color: 999px;
+            padding-left: 20px;
+        }
+
+        .wrong {
+            color: red;
+        }
+
+        .right {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <input type="text" value="手机">
+        <script>
+            var input = document.querySelector("input");
+            input.onfocus = function () {
+                if (this.value === "手机") {
+                    this.value = "";
+                }
+                //获得焦点需要把文本框里的颜色变深
+                this.style.color = "#333";
+            }
+            input.onblur = function () {
+                if (this.value === "") {
+                    this.value = "手机";
+                }
+                //失去焦点需要把文本框里的颜色变浅
+                this.style.color = "#999";
+            }
+        </script>
+
+        <div class='register'>
+            <input type="password" class='ipt'>
+            <p class='message'>请输入6到16位的密码</p>
+        </div>
+        <script>
+            var ipt = document.querySelector(".ipt");
+            var message = document.querySelector(".message");
+            ipt.onblur = function () {
+                if (this.value.length < 6 || this.value.length > 16) {
+                    message.className = "message wrong";
+                    message.innerHTML = "密码格式不正确！";
+                } else {
+                    message.className = "message right";
+                    message.innerHTML = "您输入的密码格式正确！";
+                }
+            }
+        </script>
+
+
+    </body>
+</body>
+
+</html>

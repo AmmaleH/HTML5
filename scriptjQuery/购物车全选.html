@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .all {
+            width: 200px;
+            height: 200px;
+            margin: 30px auto;
+        }
+
+        .test {
+            margin: 20px 10px;
+            width: 300px;
+            height: 300px;
+            background-color: pink;
+            position: relative;
+        }
+
+        .con {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            right: 30px;
+            bottom: 30px;
+        }
+    </style>
+    <script src='../js/jquery.min.js'></script>
+    <script>
+        $(function () {
+            //点击全选，将全部选中
+            $('.check_all').change(function () {
+                $('.check').prop('checked', $(this).prop('checked'));
+            });
+
+            //下面的全选中，则全选框也要被选中，否则下面的有一个未被选中，则全选框不选中
+            $('.check').change(function () {
+                if ($('.check:checked').length === $('.check').length)
+                    $('.check_all').prop('checked', true);
+                else $('.check_all').prop('checked', false);
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class='all'>
+        <input type="checkbox" class="check_all">
+        <br />
+        <div class='part'>
+            <input type="checkbox" class="check">
+            <input type="checkbox" class="check">
+            <input type="checkbox" class="check">
+        </div>
+    </div>
+
+    <div class='test'>111</div>
+    <div class='test'>111</div>
+    <div class='test'>111</div>
+    <div class='test'>111</div>
+    <div class='test'>111</div>
+    <div class='test'>111</div>
+    <div class='test'>111</div>
+
+    <div class='con'></div>
+</body>
+
+</html>

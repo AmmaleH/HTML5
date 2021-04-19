@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS1</title>
+    <style>
+        /* * {
+            font-size: larger;
+        } */
+
+        /* p {
+            color: #e60a0a;
+            font-size: 12px;
+            text-align: center;
+        } */
+
+        /* .blue {
+            color: blue;
+        }
+
+        #pink {
+            color: pink;
+        } */
+
+        * {
+            margin: 0;
+        }
+
+        .container {
+            overflow: hidden;
+            width: 300px;
+            height: 300px;
+            margin: 30px;
+            border: 1px solid red;
+        }
+
+        .container>img {
+            float: left;
+            width: 200px;
+            height: 50px;
+        }
+
+        .container>p {
+            margin-left: 210px;
+            word-break: break-all;
+        }
+
+        .father {
+            width: 300px;
+            height: 300px;
+            border: 1px solid skyblue;
+        }
+
+        .father>img {
+            float: left;
+            width: 100px;
+            margin-right: 10px;
+        }
+
+        .father .animal {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <p>有点意思</p>
+    <div class="blue">bfujandanfbjfanjndkanbunfijand</div>
+    <div id="pink">bjsnfnjsfnruwsfbsjzsfbus</div> -->
+
+    <div class="container">
+        <img src="../images/1000.webp" alt="">
+        <p class="word-break">bfujandanfbjfanjndanbunfiand</p>
+    </div>
+
+    <div class="father">
+        <img src="../images/animal1.jpg" alt="">
+        <p class="animal">小猫1 小狗1 小鸟1，小猫2 小狗2 小鸟2，小猫3 小狗3 小鸟3，小猫4 小狗4 小鸟4。</p>
+    </div>
+    <input type="text" placeholder="请输入...">
+    <button>点击获得input焦点</button>
+    <script>
+        var btn = document.getElementsByTagName('button');
+        console.log(btn);
+        btn[0].onclick = function () {
+            document.querySelector('input').focus();
+        }
+
+    </script>
+</body>
+
+</html>

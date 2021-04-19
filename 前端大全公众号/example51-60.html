@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example51-60</title>
+</head>
+
+<body>
+    <script>
+        console.log("--------51-------");
+        function getInfo51(number, year) {
+            number.name = "Lydia";
+            year = "1998";
+        }
+        const person51 = { name: "Sarah" };
+        var birthYear51 = "1997";
+        getInfo51(person51, birthYear51);
+        console.log(person51, birthYear51);   // {name: "Lydia"}  1997
+        // 传参中引用传递原来的只会被改变，而值传递不会（引用类型传地址，基础类型传值）
+
+        console.log("--------52-------");
+        function greeting52() {
+            throw "Hello world!";
+        }
+        function sayHi52() {
+            try {
+                const data = greeting52();
+                console.log("It worked!", data);
+            } catch (e) {
+                console.log("Oh on an error: ", e);
+            }
+        }
+        sayHi52();    // Oh no an error: Hello world!
+        // throw 语句可以创建自定义错误，且可以抛出异常。
+        // 异常可以是一个字符串、数字、布尔值或对象。
+
+        console.log("--------53-------");
+        function Car53() {
+            this.make = "Lamborghini";
+            return { make: "Maserati" };
+        }
+        const myCar53 = new Car53();
+        console.log(myCar53.make);    // Maserati
+        // 构造函数中本不需要 return,有的话有两种情况
+        // 1. return 的是基本数据类型，则 return 无效；
+        // 2. return 的是对象，则直接构造函数其他语句无效，返回该对象
+
+        console.log("--------54-------");
+        (() => {
+            let x = (y = 10);
+        })();
+        console.log(typeof x);   // undefined
+        console.log(typeof y);   // number
+        // 这里 x 是局部变量，全局作用域下访问不到 x，所以为 undefined
+
+        console.log("--------55-------");
+        class Dog55 {
+            conostructor(name) {
+                this.name = name;
+            }
+        }
+        Dog55.prototype.bark = function () {
+            console.log(`Woof I am ${this.name}`);
+        }
+        const pet55 = new Dog55("Mara");
+        pet55.bark();        // Woof I am Mara 
+        delete Dog55.prototype.bark;
+        // pet55.bark();       //   TypeError
+
+        console.log("--------56-------");
+        const set56 = new Set([1, 1, 2, 3, 4]);    // {1, 2, 3, 4}
+
+        console.log("--------57-------");
+        // es6 的模块化（import、export），修改源文件的值会报错
+        // commomJS标准下（require）是可以修改的
+
+        console.log("--------58-------");
+        const name58 = "Lydia";
+        age58 = 21;
+        console.log(delete name);   // false
+        console.log(delete age);    // true
+        // 对象与对象的属性特性：writable、enumerable、configuration、value
+        // 利用关键字声明的对象 configuration:false，不可被 delete
+
+        console.log("--------59-------");
+        const numbers59 = [1, 2, 3, 4, 5];
+        const [y59] = numbers59;
+        console.log(y59);     // 1
+        // 解构赋值，只解构了第一个
+
+        console.log("--------60-------");
+        const user60 = { name: "Lydia", age: 21 };
+        const admin60 = { admin: true, age: 22, ...user60, name: "ldh" };
+        console.log(admin60);  // {admin: true, age: 21, name: "ldh"}
+    </script>
+</body>
+
+</html>

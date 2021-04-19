@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+    </nav>
+    <script>
+        'use strict';
+        var lis = document.querySelector('nav').querySelectorAll('li');
+        for (var i = 0; i < lis.length; i++) {
+            //循环注册点击事件
+            //利用for循环生成4个立即执行函数
+            //立即执行函数也成为小闭包，因为立即执行函数里面的任何一个函数都可以使用它的变量i
+            (function (i) {
+                lis[i].addEventListener('click', function () {
+                    console.log(i);
+                })
+            })(i);
+
+            //闭包应用，3秒后打印所有的li标签中的值
+            (function (i) {
+                setTimeout(function () {
+                    console.log(lis[i].innerHTML);
+                }, 3000);
+            })(i);
+        }
+
+    </script>
+</body>
+
+</html>

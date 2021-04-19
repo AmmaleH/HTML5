@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣杯布局padding</title>
+    <!-- float + position + margin(负值) + padding(父盒子)-->
+    <!-- 思路：父盒子设置左右的padding，让middle占据所有的内容区，left、right用margin负值填充两边 -->
+    <!-- 如果main要给左边的left模块和右边的right模块都让出一定宽度来的话，
+    只有padding：0 100px 0 200px;或者margin：0 100px 0 200px;这两种方式！
+    这两条路线，如果走margin路线， 一路走下去，你会发现最后你写出的代码就是双飞翼如果走padding路线，那就是圣杯！ -->
+
+    <style>
+        /* header {
+            width: 100%;
+            height: 40px;
+            background-color: darkseagreen;
+        } */
+
+        .container {
+            height: 200px;
+            /* 用margin的话就不能有 overflow: hidden; */
+            /* padding: 0 200px; */
+            margin: 0 200px;
+            /* overflow: hidden; */
+        }
+
+        .middle {
+            float: left;
+            width: 100%;
+            height: 200px;
+            background-color: deeppink;
+        }
+
+        .left {
+            float: left;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-left: -100%;
+            left: -200px;
+            background-color: blue;
+        }
+
+        .right {
+            float: left;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-left: -200px;
+            right: -200px;
+            background-color: darkorchid;
+        }
+
+        /* footer {
+            width: 100%;
+            height: 40px;
+            background-color: darkslategray;
+        } */
+    </style>
+</head>
+
+<body>
+    <header>
+        <h4>内容区</h4>
+    </header>
+    <div class="container">
+        <div class="middle">
+            <h4>中间弹性区,好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。
+                好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。
+                好好学习天天向上。好好学习天天向上。好好学习天天向上。
+            </h4>
+        </div>
+        <div class="left">
+            <h4>左边栏</h4>
+        </div>
+        <div class="right">
+            <h4>右边栏</h4>
+        </div>
+    </div>
+    <footer>
+        <h4>footer内容区</h4>
+    </footer>
+
+
+
+</body>
+
+</html>

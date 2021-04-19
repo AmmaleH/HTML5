@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example11-20</title>
+</head>
+
+<body>
+    <script>
+        function Person11(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+        const member11 = new Person11('Lydisa', 'Hallie');
+        Person11.getFullName = function () {
+            return `${this.firstName} ${this.lastName}`;
+        }
+        Person11.prototype.getFullName1 = function () {
+            return `${this.firstName} ${this.lastName}`;
+        }
+        console.log(member11.getFullName1()); // Lydisa Hallie
+        console.log(Person11.getFullName());  // underfined undefined
+        // console.log(member11.getFullName());  // TypeError
+        // 从 js 原型链的角度看，getFullName 是 Person11 这个 function 变量的一个属性。
+        // 调用 member11 的 getFullName 方法，先从member11 上找，找不到则去
+        // member11.__proto__(也就是Person11.prototype)上找，然而找不到。
+        // Person11.getFullName()中 firstName、lastName没有值，返回 undefined
+
+        console.log("--------12-------");
+        function Person12(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+        const lydia12 = new Person12('Lydia', 'Hallie');
+        const sarah12 = Person12('Sarah', 'Smith');
+        console.log(lydia12);   // Person12{first: "Lydia", lastName: "Hallie"}
+        console.log(sarah12);   // undefined
+        //构造函数也是函数，不用 new 的话返回 undefined，用 new 返回创建的对象
+
+        console.log("--------13-------");
+        // 事件传播的三个阶段是什么？
+        // Capturing -> target -> bubbling   即捕获、目标、冒泡
+
+        console.log("--------14-------");
+        // 所有对象都有原型？   错
+        // 除了基本对象（base object），所有对象都有原型
+
+        console.log("--------15-------");
+        function sum15(a, b) {
+            return a + b;
+        }
+        sum15(1, '2');   // "12"
+
+        console.log("--------16-------");
+        let number16 = 0;
+        console.log(number16++);  // 0
+        console.log(++number16);  // 2
+        console.log(number16);    // 2
+
+        console.log("--------17-------");
+        function getPersonInfo17(one, two, three) {
+            console.log(one);
+            console.log(two);
+            console.log(three);
+        }
+        const person = "Lydia";
+        const age = 21;
+        getPersonInfo17`${person} is ${age} years old`;
+        // ["", " is ", " years old"] "Lydia" 21
+        // 标签函数
+
+        console.log("--------18-------");
+        function checkAge18(data) {
+            if (data === { age: 18 }) {
+                console.log(1);
+            } else if (data == { age: 18 }) {
+                console.log(2);
+            } else {
+                console.log(3);
+            }
+        }
+        checkAge18({ age: 18 });   // 3
+        // 对象在栈中存储的是其存储在堆中的内容的地址，不同对象，地址必定不同
+
+        console.log("--------19-------");
+        function getAge19(...args) {
+            console.log(typeof args);
+            console.log(args);
+        }
+        getAge19(21);   // "object" [21]
+        // agrs 是个伪数组，所以 args 为 [21]
+        // 但是 typeof 只会返回 undefined、object、number、boolean、string、symbol、function
+
+        console.log("--------20-------");
+        function getAge20() {
+            'use strict';
+            age20 = 211;
+            console.log(age20);
+        }
+        getAge20();  // ReferenceError
+    </script>
+</body>
+
+</html>

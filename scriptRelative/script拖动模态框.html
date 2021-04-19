@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .login {
+            margin: 15px auto;
+            background-color: red;
+            width: 300px;
+            height: 200px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .loginPage {
+            position: absolute;
+            display: none;
+            width: 400px;
+            height: 300px;
+            background-color: #ccc;
+            /* margin: auto; */
+        }
+
+        #content {
+            border: 2px solid blue;
+            background-color: pink;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- //拖动模态框 -->
+    <div class='login'><a href="javascript:;" class='aa'>登录（点击进行登录）</a></div>
+    <div class='loginPage'>
+        <div id="content">当前页面为登录页面</div>
+        <button>关闭</button>
+    </div>
+    <script>
+        var login = document.querySelector('.login');
+        var aa = document.querySelector('.aa');
+        var loginPage = document.querySelector('.loginPage');
+        var btn = document.querySelector('button');
+        var content = document.querySelector('#content');
+        aa.addEventListener('click', function () {
+            loginPage.style.display = 'block';
+        })
+        btn.addEventListener('click', function () {
+            loginPage.style.display = 'none';
+            // loginPage.style.left = 200 + 'px';
+        })
+        content.addEventListener('mousedown', function (e) {
+            //获取鼠标按下时在loginPage盒子中的坐标
+            var x = e.pageX - loginPage.offsetLeft;
+            var y = e.pageY - loginPage.offsetTop;
+            console.log('鼠标按下了');
+            document.addEventListener('mousemove', move);
+
+            function move(e) {
+                console.log('鼠标移动了');
+                console.log(e.pageX - x + 'px');
+                console.log(e.pageY - y + 'px');
+
+                //此处有个坑  必须loginPage对应元素为绝对定位(position:absolute;),下面才有效
+                loginPage.style.left = e.pageX - x + 'px';
+                loginPage.style.top = e.pageY - y + 'px';
+            }
+            document.addEventListener('mouseup', function () {
+                document.removeEventListener('mousemove', move);
+            })
+        })
+    </script>
+</body>
+
+</html>

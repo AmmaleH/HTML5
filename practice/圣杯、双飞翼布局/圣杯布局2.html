@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣杯布局float</title>
+    <!-- float + margin 注意div元素的顺序是 left right middle -->
+    <!-- 思路：让left、right浮动到左右两边，再让middle占据中间，需要注意的是div的顺序有讲究 -->
+    <style>
+        .container {
+            overflow: hidden;
+            background-color: #eee;
+        }
+
+        .left {
+            background: red;
+            width: 200px;
+            height: 100px;
+            float: left;
+        }
+
+        .right {
+            background-color: blue;
+            width: 200px;
+            height: 190px;
+            float: right;
+        }
+
+        .middle {
+            height: 100px;
+            width: 100%;
+            margin-left: 200px;
+            margin-right: 200px;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <h4>左边栏</h4>
+        </div>
+        <div class="right">
+            <h4>右边栏</h4>
+        </div>
+        <div class="middle">
+            中间弹性区,好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。
+            好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。
+            好好学习天天向上。好好学习天天向上。好好学习天天向上。
+        </div>
+    </div>
+</body>
+
+</html>

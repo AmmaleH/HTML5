@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .top {
+            height: 50px;
+            background-color: gray;
+        }
+
+        .banner {
+            height: 150px;
+            width: 830px;
+            background-color: gray;
+            margin: 10px auto;
+        }
+
+        .box {
+            height: 600px;
+            width: 830px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .box ul>li {
+            float: left;
+            height: 600px;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .box .last {
+            margin-right: 0;
+        }
+
+        .box>ul>li>ul .up {
+            height: 200px;
+            background-color: greenyellow;
+        }
+
+        .box>ul>li>ul .below {
+            height: 380px;
+            margin-top: 18px;
+            background-color: #ddd;
+            border-top: 1px solid red;
+        }
+
+        .footer {
+            height: 100px;
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">top</div>
+    <div class="banner">banner</div>
+    <div class="box">
+        <ul>
+            <li>
+                <ul>
+                    <li class='up'>2</li>
+                    <li class='below'>2</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li class='up'>2</li>
+                    <li class='below'>2</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li class='up'>2</li>
+                    <li class='below'>2</li>
+                </ul>
+            </li>
+            <li class='last'>
+                <ul>
+                    <li class='up'>2</li>
+                    <li class='below'>2</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="footer">footer</div>
+</body>
+
+</html>

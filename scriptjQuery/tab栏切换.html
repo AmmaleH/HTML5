@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .current {
+            background-color: red;
+        }
+
+        .tab {
+            width: 1000px;
+            height: 500px;
+            margin: 50px auto;
+            border: 1px solid brown;
+        }
+
+        .tab_list {
+
+            height: 50px;
+            border-bottom: 1px solid green;
+        }
+
+        .tab_list ul>li {
+            display: inline-block;
+            border-right: 1px solid blue;
+            width: 235px;
+            margin: 0;
+            line-height: 40px;
+        }
+    </style>
+    <script src="../js/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('.tab_list li').click(function () {
+                //1.点击li，当前小 li 添加 current 类，其他小 li 移除类
+                $(this).addClass('current').siblings().removeClass('current');
+
+                //2.点击li，让当前小li下面的item显示，其余的item隐藏
+                var index = $(this).index();
+                console.log(index);
+                $('.tab_con .item').eq(index).show().siblings().hide();
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li>标题1</li>
+                <li>标题2</li>
+                <li>标题3</li>
+                <li>标题4</li>
+            </ul>
+        </div>
+        <div class="tab_con">
+            <div class='item' style="display:block;">内容1</div>
+            <div class='item' style="display:none;">内容2</div>
+            <div class='item' style="display:none;">内容3</div>
+            <div class='item' style="display:none;">内容4</div>
+        </div>
+    </div>
+</body>
+
+</html>

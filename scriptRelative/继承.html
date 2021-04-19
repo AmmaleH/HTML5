@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+
+        // 1.原型链继承
+        // 实现： 将子类型的构造函数的原型指向，父类型的实例对象。
+        // 两个缺点：
+        // 1. 父类型的原型属性和方法会变成，子类型的实例对象的共享属性和方法，任何其中一个子类型的实例上发生改变，会全部改变。
+        // 2. 子类型在实例化过程中，不能传参给父类型的构造函数。
+        function SuperType() {
+            this.superProperty = true;
+        }
+        SuperType.prototype.getSuperValue = function () {
+            return this.superProperty;
+        }
+        function SubType() {
+            this.subProperty = false;
+        }
+        // 将 SubType 的原型（prototype）指向 SuperType 创建的实例，实现继承
+        SubType.prototype = new SuperType();
+        SubType.prototype.getVal = () => {
+            console.log(2);
+        };
+        SubType.prototype.getSubValue = function () {
+            return this.subProperty;
+        }
+        let subInstance = new SubType();
+        console.log(SubType.prototype);         // SuperType {superProperty: true, getVal: ƒ, getSubValue: ƒ}
+        console.log(SubType.__proto__);         // ƒ () { [native code] }
+        console.log(SubType.superProperty);     // undefined
+        console.log(subInstance);               // SubType {subProperty: false}
+        // 此处子类的实例就可以通过原型链调用父类的方法
+        console.log(subInstance.getSuperValue());    // true
+        console.log(subInstance.getVal());          // 2 undefined
+        console.log(subInstance.getSubValue());     // false
+        console.log(subInstance.__proto__.superProperty);   // true
+        console.log(subInstance.constructor);       // f SuperType() { this.superProperty = true; }
+        // 原型链继承的问题：子类的原型的 constructor 属性会指向父类而不是自己
+        console.log(SubType.prototype.constructor);     // f SuperType() { this.superProperty = true; }
+        console.log(subInstance instanceof Object);     // true
+        console.log(Object.prototype.isPrototypeOf(subInstance));    // true
+
+        // 圣杯模式：解决上面原型链继承的问题
+        function inherit() {
+            var F = function () { };
+            return function (Target, Origin) {
+                F.prototype = Origin.prototype;
+                Target.prototype = new F();
+                Target.constructor = Target;
+                Target.prototype.uber = Origin.prototype;
+            }
+        }
+
+        console.log("-------222222222222222222222222--------");
+
+        // 2.盗用构造函数继承
+        // 缺点：1.必须在构造函数中定义方法，因此函数不能重用。（也是使用构造函数模式自定义类型的问题）
+        // 2.子类不能访问父类原型上定义的方法，因此所有类型只能使用构造函数模式。
+        function SuperType1() {
+            this.colors = ['red', 'green', 'yellow'];
+        }
+        function SubType1() {
+            // 继承 SuperType
+            SuperType1.call(this);
+        }
+        let stealInstance1 = new SubType1();
+        stealInstance1.colors.push('blue');
+        let stealInstance2 = new SubType1();
+        stealInstance2.colors.push('brown');
+        console.log(stealInstance1.colors);   //["red", "green", "yellow", "blue"]
+        console.log(stealInstance2.colors);   //["red", "green", "yellow", "brown"]
+
+        console.log("-------3333333333333333333--------");
+
+        // 3. 组合继承
+        // 集中了原型链和盗用构造函数两者的优点
+        // 缺点：父类构造函数始终会被调用两次 
+        // 一次是创建子类原型时调用，第二次是在子类构造函数中调用
+        function SuperType2(name) {
+            this.name = name;
+            this.colors = ['pink', 'hotpink', 'skyblue'];
+        }
+        function SubType2(name, age) {
+            // 继承属性
+            SuperType2.call(this, name);
+            this.age = age;
+        }
+        // 继承方法
+        SubType2.prototype = new SuperType2();
+        SubType.prototype.sayMsg = function () {
+            console.log(this.name + this.age);
+        }
+        let mergeInstance1 = new SubType2('ldh', 22);
+        let mergeInstance2 = new SubType2('zxy', 34);
+        mergeInstance1.colors.push('white');
+        console.log(mergeInstance1.colors);     // ["pink", "hotpink", "skyblue", "white"]
+        console.log(mergeInstance1.name);       // ldh
+        console.log(mergeInstance2.colors);     // ["pink", "hotpink", "skyblue"]
+        console.log(mergeInstance2.name);       // zxy
+
+        console.log("------44444444444444444-------");
+
+        // 4. 原型式继承
+        // 非常适合不需要单独创建构造函数，但仍然需要在对象间共享信息的场合。
+        // object() 中创建了一个中间函数，并让该函数的原型指向父类型构造函数的实例对象，最后返回一个该函数的实例对象。
+        // object() 本质上是对传入的对象执行了一次浅复制。
+        // ECMAScript5 通过增加Object.create()方法将原型式继承的概念规范化了。
+        function object(obj) {
+            function F() { };
+            F.prototype = obj;
+            return new F();
+        }
+        let person = {
+            name: 'ldh',
+            colors: ['gray', 'purple', 'black']
+        }
+        let son1 = object(person);
+        son1.name = 'qing';
+        son1.colors.push('red');
+        let son2 = object(person);
+        son2.name = 'zxy';
+        son2.colors.push('pink');
+        console.log(son1);      // F {name: "qing"}
+        console.log(son2);      // F {name: "zxy"}
+
+        console.log("--------555555555555555--------");
+
+        //5. 寄生式继承
+        // 寄生式继承同样适合于：主要关注对象，而不在乎类型和构造函数的场景
+        // 思路类似于寄生构造函数和工厂模式：
+        // 创建一个实现继承的函数，以某种方式增强对象，然后返回这个对象
+        // 其实就是在原型式继承中对子类型的对象进行了属性或方法的扩展。
+        function createAnother(origin) {
+            // 通过调用函数创建一个新对象
+            // 以某种方式增强这个对象
+            let newObj = object(origin);
+            newObj.Song = function () {
+                console.log("music!!!");
+            }
+            return newObj;
+        }
+        let person1 = {
+            name: 'zxc',
+            friends: ['ldh', 'zxy', 'gtl']
+        }
+        let son3 = createAnother(person1);
+        let son4 = createAnother(person1);
+        console.log(son3);      // F {Song: ƒ}
+        //      Song: ƒ ()
+        //      __proto__:
+        //      friends: (3) ["ldh", "zxy", "gtl"]
+        //      name: "zxc"
+        //      __proto__: Object
+        console.log(son4);      // 同上
+
+        console.log("--------6666666666666666666666--------");
+
+        // 6. 寄生式组合继承
+        // 相比组合继承，它最后把子类型构造函数的原型的 constructor 指回了自己
+        // 寄生式组合继承可以算是引用类型继承的最佳模式
+        function SuperType3(name) {
+            this.name = name;
+            colors = ['red', 'yellow', 'pink'];
+        }
+        SuperType3.prototype.sayName = function () {
+            console.log("myname is: " + this.name);
+        }
+        function SubType3(name, age) {
+            SuperType.call(this, name);
+            this.age = age;
+        }
+        SubType3.prototype = new SuperType3();
+        SubType3.prototype.constructor = SubType3;
+        SubType.prototype.sayAge = function () {
+            console.log("my age is: " + this.age);
+        }
+
+
+    </script>
+</body>
+
+</html>

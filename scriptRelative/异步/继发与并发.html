@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>继发与并发</title>
+</head>
+
+<body>
+    <script type="module" src="createPromise.js">
+        import { add } from "createPromise.js";
+        console.log(add(1, 2));
+        async function A1() {
+            let n1 = await createPromise();
+            console.log('N1', n1);
+            let n2 = await createPromise();
+            console.log('N2', n2);
+            let n3 = await createPromise();
+            console.log('N3', n3);
+        }
+        async function A2() {
+            for (let i = 0; i < 3; i++) {
+                let n = await createPromise();
+                console.log("N" + (i + 1), n);
+            }
+        }
+        function createPromise() {
+            return new Promise(resolve => {
+                setTimeout(function () {
+                    console.log(10);
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+
+</html>

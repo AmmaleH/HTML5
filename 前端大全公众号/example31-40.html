@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example31-40</title>
+</head>
+
+<body>
+    <!-- --------31------- -->
+    <div onclick="console.log('first div')">
+        <div onclick="console.log('second div')">
+            <button>
+                click!
+            </button>
+        </div>
+    </div>
+
+    <!-- --------32------- -->
+    <div onclick="console.log('div')">
+        <p onclick="console.log('p')">
+            Click here!
+        </p>
+    </div>
+    <script>
+        console.log("--------31-------");
+        // 当点击按钮时， event.target 是什么
+        // button
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function (event) {
+            console.log("button");
+            console.log(event.target);
+        });
+
+        console.log("--------32-------");
+        // 点击该段落时，日志输出是什么？
+        // p div
+        // 注：事件冒泡
+
+        console.log("--------33-------");
+        const person33 = { name: 'Lydia' };
+        function sayHi33(age) {
+            console.log(`${this.name} is ${age}`);
+        }
+        sayHi33.call(person33, 21);   // Lydia is 21
+        sayHi33.apply(person33, [22]);  // Lydia is 22
+        sayHi33.bind(person33, 23);   // 无输出 function
+        // 注： call()、apply()、bind()都可以改变函数的this指向，
+        // 前两者会执行当前函数，bind不会
+
+        console.log("--------34-------");
+        function sayHi34() {
+            return (() => 0)();
+        }
+        console.log(typeof sayHi34());    //number
+        // 注：sayHi34() 返回的是一个立即执行函数，立即执行函数中返回的是 0
+
+        console.log("--------35-------");
+        console.log(Boolean(0));     // false
+        console.log(Boolean(new Number(0)));   // true
+        console.log(Boolean(''));       // false
+        console.log(Boolean(' '));      // true
+        console.log(Boolean(new Boolean(false)));  // true
+        console.log(Boolean(undefined));    // false
+        // 注：js中非Boolean类型定义为false的有：0(+0、-0)、null、undefined、NaN、空字符串
+
+        console.log("--------36-------");
+        console.log(typeof typeof 1);   // string
+        // typeof 1 输出为number，而number的类型为string
+
+        console.log("--------37-------");
+        const numbers37 = [1, 2, 3];
+        numbers37[10] = 11;
+        console.log(numbers37);  // [1, 2, 3, empty * 7, 11]
+
+        console.log("--------38-------");
+        (() => {
+            let x, y;
+            try {
+                throw new Error();
+            } catch (x) {     // 这个括号里面的 x 是catch块级作用域内的
+                (x = 1), (y = 2);
+                console.log(x);   // 此处 catch 里面的 x 是私有变量，不会改变全局的 x 的值。
+            }
+            console.log(x);
+            console.log(y);
+        })();
+        // 输出为：1 undefined 2
+        // 输出顺序为上面的代码顺序
+
+        console.log("--------39-------");
+        // JavaScript 中的一切都是？
+        // A.基本类型与对象
+        // B.函数与对象
+        // C.只有对象    √
+        // D.数字与对象
+
+        console.log("--------40-------");
+        var arr40 = [[0, 1], [2, 3]].reduce((acc, cur, index) => {
+            return acc.concat(cur);
+        }, [1, 2]);
+        console.log(arr40);    // [1, 2, 0, 1, 2, 3]
+        // reduce(callback, initialValue);
+        // callback为回调函数，里面有四个参数：
+        // previousValue: reduce函数内的返回值，第一次为初始值：initialValue
+        // currentValue: 数组中的当前元素
+        // index: 数组当前元素的索引值
+        // array: 调用reduce()的当前数组
+        // 注意：若没有写initialValue，则callback会从arr的索引为 1 的元素开始执行，
+        // 反之，会从索引为 0 的元素开始执行
+        // callback 里面不能使用 break 中断退出循环，会报错
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <STYLE>
+        .nav ul li {
+            border-bottom: 1px solid #FECC5B;
+        }
+
+        .nav ul li a:hover {
+            background-color: hotpink;
+        }
+
+        #left {
+            background-color: green;
+        }
+
+        .content {
+            background-color: hotpink;
+        }
+
+        .rotate {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+            margin: 50px auto;
+            transition: all 0.5s;
+        }
+
+        .current {
+            background-color: red;
+            transform: rotate(360deg);
+        }
+    </STYLE>
+    <script src='../js/jquery.min.js'></script>
+</head>
+
+<body>
+
+    <ul class='nav'>
+        <li>
+            <a href='#'>微博</a>
+            <ul>
+                <li><a href='#'>私信</a></li>
+                <li><a href='#'>评论</a></li>
+                <li><a href='#'>@我</a></li>
+            </ul>
+        </li>
+
+
+        <li>
+            <a href='#'>微博</a>
+            <ul>
+                <li><a href='#'>私信</a></li>
+                <li><a href='#'>评论</a></li>
+                <li><a href='#'>@我</a></li>
+            </ul>
+        </li>
+
+    </ul>
+
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+
+    <ul id='left'>
+        <li index='1'>a</li>
+        <li index='2'>ab</li>
+        <li index='3'>abc</li>
+        <li index='4'>abcd</li>
+        <li index='5'>abcde</li>
+    </ul>
+
+    <div class="rotate">
+        可旋转的盒子(点击)
+    </div>
+    <script>
+        $(document).ready(function () {
+            //鼠标经过
+            $('.nav>li').mouseover(function () {
+                //$(this) jQuery当前元素
+                $(this).children('ul').show();
+            });
+            //鼠标离开
+            $(".nav>li").mouseout(function () {
+                $(this).children('ul').hide();
+            })
+
+            //排他思想 按钮
+            //1.隐式迭代
+            $('button').mouseover(function () {
+                $(this).css('background', "pink");
+                $(this).siblings("button").css("background", '');
+            });
+
+            //获取索引号
+            $("#left>li").click(function () {
+                $(this).toggleClass("content");     //切换类
+                console.log($(this).index());
+            });
+
+            //切换类 旋转盒子
+            $(".rotate").click(function () {
+                $(this).toggleClass('current');
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

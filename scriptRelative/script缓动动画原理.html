@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .xiaoming {
+            position: absolute;
+            left: 0;
+            margin: 30px 0;
+            width: 50px;
+            height: 40px;
+            background-color: red;
+        }
+
+        .xiaoli {
+            position: absolute;
+            left: 0;
+            top: 150px;
+            margin: 30px 0;
+            width: 60px;
+            height: 45px;
+            background-color: rgb(58, 158, 145);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- //让盒子匀速、变速移动 -->
+    <button>按下按钮小李才走</button>
+    <div class='xiaoming'>小明</div>
+    <div class='xiaoli'>小李</div>
+    <script>
+        var btn = document.querySelector('button');
+        var xiaoming = document.querySelector('.xiaoming');
+        var xiaoli = document.querySelector('.xiaoli');
+
+        function animate(obj, distance, callback) {     //callback形参为回调函数
+            clearInterval(obj.timer);
+            //每次移动的步长  缓动动画的核心
+            var step = (distance - obj.offsetLeft) / 20;
+            obj.timer = setInterval(function () {
+                if (obj.offsetLeft >= distance) {
+                    //停止动画，本质上是清除计数器
+                    clearInterval(obj.timer);
+                    if (callback) {
+                        //调用函数
+                        callback();
+                    }
+                }
+                obj.style.left = obj.offsetLeft + step + 'px';   //此处为定值则是匀速动画
+
+            }, 30);
+        }
+        animate(xiaoming, 500);
+        btn.addEventListener('click', function () {
+            animate(xiaoli, 800, function () {
+                alert('结束了');
+                xiaoli.style.background = 'pink';
+            });
+        })
+    </script>
+</body>
+
+</html>

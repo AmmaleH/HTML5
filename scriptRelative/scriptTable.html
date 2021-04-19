@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <table cellspace="0">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <script>
+            //1.先准备好学生的数据
+            var dates = [
+                {
+                    name: "张三",
+                    subject: 'javascript',
+                    score: 98
+                }, {
+                    name: "李四",
+                    subject: 'javascript',
+                    score: 100
+                }, {
+                    name: "王五",
+                    subject: 'javascript',
+                    score: 90
+                }, {
+                    name: "刘六",
+                    subject: 'javascript',
+                    score: 89
+                }
+            ];
+
+            //2.往tbody里创建行
+            var tbody = document.querySelector('tbody');
+            for (var i = 0; i < dates.length; i++) {  //管行 tr
+                //创建tr 行
+                var tr = document.createElement('tr');
+                tbody.appendChild(tr);
+                //行里面创建单元格 td 单元格的数量取决于每个对象里面的属性个数
+                for (var k in dates[i]) {   //管列 td
+                    var td = document.createElement('td');
+                    //把对象里面的属性值给 td
+                    td.innerHTML = dates[i][k];
+                    tr.appendChild(td);
+                }
+
+                //3.创建有删除2个字的单元格
+                var td = document.createElement('td');
+                td.innerHTML = "<a href = 'javascript:;'>删除</a>";
+                tr.appendChild(td);
+            }
+
+            //4.删除
+            var sc = document.querySelectorAll('a');
+            for (var j = 0; j < sc.length; j++) {
+                sc[j].onclick = function () {
+                    // console.log(tbody.children);
+                    tbody.removeChild(this.parentNode.parentNode);
+                }
+            }
+
+
+        </script>
+    </table>
+
+</body>
+
+</html>

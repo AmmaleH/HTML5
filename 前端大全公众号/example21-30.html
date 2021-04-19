@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example21-30</title>
+</head>
+
+<body>
+    <script>
+        const sum21 = eval("10*10+5");
+        console.log(sum21);   // 105
+        // eval 函数是执行 "10*10+5" 这个字符串
+
+        console.log("--------22-------");
+        // 问：cool_secret 可访问多长时间？
+        sessionStorage.setItem('cool_secret', 123);   // 当用户关闭标签页时
+        // 注：sessionStorage 刷新页面不会丢失，但关闭标签页会丢失。
+        // localStorage 刷新、关闭标签页、关闭整个浏览器、关闭电脑都不会丢失，
+        //      直到过期或者清除缓存。
+
+        console.log("--------23-------");
+        var num23 = 8;
+        var num23 = 10;
+        console.log(num23);  // 10
+
+        // console.log(3.toString());
+        console.log(3..toString());
+        // console.log(3...toString());
+
+        console.log("--------24-------");
+        const obj24 = { 1: 'a', 2: 'b', 3: 'c' };
+        const set24 = new Set([1, 2, 3, 4, 5]);
+        console.log(obj24.hasOwnProperty('1'));  // true
+        console.log(obj24.hasOwnProperty(1));    // true  （会隐式转换成字符串类型）
+        console.log(set24.has('1'));    // false
+        console.log(set24.has(1));      // true
+        // 注：object.prototype.hasOwnProperty()中属性名的形式是 String 或 Symbol
+        // Set 中存的是啥就是啥
+
+        console.log("--------25-------");
+        const obj25 = { a: 'one', b: 'two', a: 'three' };
+        console.log(obj25);    // {a: 'three', b: 'two'}
+        // 后面的会覆盖掉前面的。
+        // 注：输出顺序会是 a 属性在前， b 在后面
+
+        console.log("--------26-------");
+        // JavaScript 全局执行上下文为你做了两件事：全局对象和this关键字
+        // 对 
+        // 基本执行上下文是全局执行上下文，它是代码中随处可访问的内容
+
+        console.log("--------27-------");
+        for (let i = 1; i < 5; i++) {
+            if (i == 3) continue;
+            console.log(i);    // 1 2 4
+        }
+        for (var i27 = 1; i27 < 5; i27++) {
+            if (i27 == 3) continue;
+            console.log(i27);   // 1 2 4
+        }
+        // continue 跳过本次循环，break 跳出循环
+        // for 循环中用 var 声明 i 时，for 循环内为同步代码块则无影响
+        // for 循环内为异步函数则 i 先全部跑完才执行异步函数（event loop 循环队列）
+
+        console.log("--------28-------");
+        String.prototype.giveLydiaPizza = () => {
+            return "just give Lydia a pizza!";
+        }
+        const name = "Lydia";
+        console.log(name.giveLydiaPizza());  // "just give Lydia a pizza!"
+        // 方法定义在构造函数的原型上，其对象即可调用。
+
+        console.log("--------29-------");
+        const a29 = {};
+        const b29 = { key: "b" };
+        const c29 = { key: "c" };
+        a29[b29] = '123';
+        a29[c29] = '456';
+        console.log(a29);   // {[object Object]: "456"}
+        console.log(a29[b29]);  // 456
+        // Object 的 key 值只有 String 和 Symbol 类型。其他类型会隐式转换成 String 类型
+        // a29[b29] 和 a29[b29] 都等价于 a29["[object Object]"]
+
+        console.log("--------30-------");
+        const a30 = () => { console.log(1); };
+        const b30 = () => { setTimeout(() => { console.log(2); }, 0); };
+        const c30 = () => { console.log(3); };
+        a30();
+        b30();
+        c30();
+        // 1 3 2
+        // 注：会先执行同步代码，再执行异步代码（event loop 循环队列）
+    </script>
+</body>
+
+</html>

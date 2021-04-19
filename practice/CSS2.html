@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS2</title>
+    <script>
+        // var age = prompt("请输入您的年龄");
+        // if (age >= 18) alert("请进！");
+        // else alert("未成年人禁止进入！");
+
+        var arr2 = [1, 2, 3, 4, 3, 5];
+        // var newArr = arr2.splice(1, 2);
+        // console.log(newArr);
+        // console.log(arr2);
+        var num2 = arr2.indexOf(3);
+        var sum = 0;
+        while (num2 !== -1) {
+            console.log(num2);
+            sum++;
+            num2 = arr2.indexOf(3, num2 + 1);
+        }
+        console.log("3的个数是： " + sum);
+
+        //获取min 和 max 之间的随机整数，包括min 和 max
+        // function getRandom(min, max) {
+        //     return min + Math.floor((max - min + 1) * Math.random());
+        // }
+        // var num = getRandom(1, 10);
+        // while (true) {
+        //     var num1 = prompt("输入一个1到10之间的整数！");
+        //     if (num1 > num) {
+        //         alert("猜大了");
+        //     } else if (num1 < num) {
+        //         alert("猜小了");
+        //     } else {
+        //         alert("恭喜你猜对了");
+        //         break;
+        //     }
+        // }
+
+
+        var myMath = {
+            PI: 3.14159,
+            max: function () {
+                var max = arguments[0];
+                for (var i = 1; i < arguments.length; i++) {
+                    if (max < arguments[i]) max = arguments[i];
+                }
+                return max;
+            }
+        }
+
+        function skill() {
+            console.log("唱歌！");
+        }
+        function Star(uname, age, sex) {
+            this.uname = uname;
+            this.age = age;
+            this.sex = sex;
+            this.skill = function (sang) {
+                console.log(sang);
+            }
+        }
+        var ldh = new Star("刘德华", 18, '男', skill());
+        ldh.skill('笨小孩');
+        console.log(ldh.uname);
+    </script>
+    <style>
+        /* div {
+            text-align: left;
+            text-indent: 2em;
+            width: 800px;
+        } */
+
+        * {
+            margin: 0;
+        }
+
+        ol li {
+            color: blue;
+        }
+
+        ol li a {
+            color: red;
+            text-decoration: none;
+        }
+
+        .twoul li {
+            color: red;
+        }
+
+        .nav1>a {
+            color: red;
+        }
+
+        .nav2 ul li a {
+            color: green;
+        }
+
+        .nav3,
+        .nav4 {
+            color: deeppink;
+        }
+
+        .nav5 a:hover {
+            color: yellow;
+        }
+
+        .nav5 a:active {
+            color: brown;
+        }
+
+        input:focus {
+            background: pink;
+            color: green;
+        }
+
+        .a_change {
+            width: 150px;
+            height: 80px;
+            background: pink;
+            display: block;
+        }
+
+        .nav6 {
+            width: 800px;
+            height: 400px;
+            background-color: pink;
+            background-image: url(images/1000.webp);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .nav7 {
+            /* font: 20px/30px "楷体"; */
+            font: 20px/1.5 "楷体";
+            color: pink;
+        }
+
+        .nav7>div {
+            /* 行高为1.5,1.5是当前元素文字大小font-size的1.5倍 */
+            font-size: 1 0px;
+        }
+
+        table {
+            width: 500px;
+            height: 300px;
+        }
+
+        table,
+        th,
+        td {
+            border: 2px solid pink;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .nav8 {
+            width: 200px;
+            height: 150px;
+            border: 10px solid pink;
+            background-color: green;
+        }
+
+        .nav9 {
+            height: 41px;
+            line-height: 41px;
+            color: #4c4c4c;
+            background-color: #fcfcfc;
+            border-top: 3px solid #ff8500;
+            border-bottom: 1px solid #0deef0;
+        }
+
+        .nav9 a {
+            /* text-align: center; */
+            text-indent: 0;
+            text-decoration: none;
+            font-size: 14px;
+            color: #4c4c4c;
+            display: inline-block;
+            height: 41px;
+            padding: 0 20px;
+        }
+
+        .nav9 a:hover {
+            background-color: red;
+            color: yellow;
+        }
+
+        .nav10 {
+            width: 300px;
+            height: 100px;
+            background-color: purple;
+            margin: auto;
+        }
+
+        .nav>p {
+            padding: 30px;
+            background: rgb(256, 0, 0, .3);
+        }
+
+        .father_height {
+            width: 200px;
+            height: 320px;
+            background-color: blue;
+            opacity: 30%;
+            border: solid pink;
+            margin-top: 10px;
+        }
+
+        .line_height {
+            /* margin-top: 10px; */
+            margin: 15px;
+            border: 5px solid red;
+            padding: 20px 10px;
+            width: 100px;
+            height: 30px;
+            line-height: 60px;
+            background-color: #adff2f;
+        }
+
+        #test22 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father_height">
+        <div class='line_height'>
+            测试height1
+        </div>
+        <div class='line_height' id='test22'>
+            测试height2
+        </div>
+    </div>
+    <div>#bufahifjina<em>in</em>an<i>dq</i>nidqnifniqni</div>
+    <div>#</div>
+    <div>#</div>
+    <div><span></span></div>
+    <div></div>
+    <p></p>
+    <div class="nav"></div>
+    <div id="nav"></div>
+    <p class="one"></p>
+    <div class="demo1"></div>
+    <div class="demo2"></div>
+    <div class="demo3"></div>
+    <div>c</div>
+    <div>想输入的内容</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+
+    <ol>
+        <li>我是ol的孩子1</li>
+        <li>我是ol的孩子2</li>
+        <li>我是ol的孩子3</li>
+        <li><a href="#">我是ol的孙子</a></li>
+    </ol>
+    <ul>
+        <li>我是ul的孩子1</li>
+        <li>我是ul的孩子2</li>
+        <li>我是ul的孩子3</li>
+        <li>我是ul的孩子4</li>
+    </ul>
+    <ul class="twoul">
+        <li>1我是ul的孩子</li>
+        <li>2我是ul的孩子</li>
+        <li>3我是ul的孩子</li>
+        <li>4我是ul的孩子</li>
+        <li>5我是ul的孩子</li>
+    </ul>
+    <div class="nav1">
+        <a href="#">我是div的nav1类的儿子</a>
+        <p>
+            <a href="#">我是div的nav1类的孙子</a>
+        </p>
+    </div>
+    <div class="nav2">
+        <ul>
+            <li><a href="#">我是div的nav2类的后代1</a></li>
+            <li><a href="#">我是div的nav2类的后代2</a></li>
+        </ul>
+    </div>
+    <div class="nav3">熊大</div>
+    <p class="nav4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;熊二</p>
+    <div class="nav5">
+        <ul>
+            <li> <a href="#">我是div的nav5类的后代1</a></li>
+            <li> <a href="#">我是div的nav5类的后代2</a></li>
+        </ul>
+    </div>
+    <input type="text">
+    <input type="text">
+    <input type="text">
+
+    <a href="#" class="a_change">大蛇丸 大蛇丸 大蛇丸 大蛇丸 </a>
+    <br>
+    <div class="nav6"></div>
+    <br>
+    <div class="nav7">
+        <div>CSS的继承属性</div>
+        <p>CSS的继承属性</p>
+    </div>
+
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>学号</th>
+            <th>学院</th>
+            <th>专业</th>
+        </tr>
+        <tr>
+            <td>张三</td>
+            <td>01</td>
+            <td>信通学院</td>
+            <td>通信工程</td>
+        </tr>
+        <tr>
+            <td>李四</td>
+            <td>02</td>
+            <td>管理学院</td>
+            <td>工商管理</td>
+        </tr>
+        <tr>
+            <td>王五</td>
+            <td>03</td>
+            <td>经济学院</td>
+            <td>经济学</td>
+        </tr>
+    </table>
+    <br>
+    <div class="nav8">bfhs bha iadj zbdu adb jadf hubsu dbajn bsuf baiuh ean djf bus uanf jnf jsbuf adj jsb fus
+        rh uaibj
+        abfj sbu ia</div>
+    <br>
+    <div class="nav9">
+        <a href="#">首页</a>
+        <a href="#">新浪客户端</a>
+        <a href="#">微博客户</a>
+        <a href="#">关注我</a>
+    </div>
+    <br>
+    <div class="nav10">
+        <p></p>
+    </div>
+</body>
+
+</html>

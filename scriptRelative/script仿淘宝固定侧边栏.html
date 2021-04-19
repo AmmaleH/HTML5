@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+        } */
+
+        .w {
+            width: 1200px;
+            margin: 20px auto;
+        }
+
+        .head {
+            height: 150px;
+            background-color: red;
+        }
+
+        .banner {
+            height: 480px;
+            background-color: green;
+        }
+
+        .main {
+            height: 1200px;
+            background-color: pink;
+        }
+
+        span {
+            display: none;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .slider-bar {
+            position: absolute;
+            left: 50%;
+            top: 300px;
+            margin-left: 600px;
+            height: 120px;
+            width: 50px;
+            background-color: rgba(0, 255, 230, .5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-bar">
+        <span class='goback'>返回头部</span>
+    </div>
+    <div class='head w'>头部区域</div>
+    <div class='banner w'>banner区域</div>
+    <div class='main w'>主体区域</div>
+    <script>
+        var slider = document.querySelector('.slider-bar');
+        var banner = document.querySelector('.banner');
+        var main = document.querySelector('.main');
+        var goback = document.querySelector('.goback');
+        var bannerTop = banner.offsetTop;
+
+        //侧边栏固定之后应该距离顶端的距离（才能看上去和之前没变化）
+        var sliderTop = slider.offsetTop - bannerTop;
+        var mainTop = main.offsetTop;
+        // console.log(sliderTop);
+        document.addEventListener('scroll', function () {
+            // console.log(window.pageYOffset);
+            //当页面头部被卷去 >= 660 ,侧边栏改为固定定位 fixed
+            if (window.pageYOffset >= bannerTop) {
+                slider.style.position = 'fixed';
+                slider.style.top = sliderTop + 'px';
+            } else {
+                slider.style.position = 'absolute';
+                slider.style.top = sliderTop + bannerTop + 'px';
+            }
+
+            //当滚动到主体部位时，显示 返回顶部
+            if (window.pageYOffset >= mainTop) {
+                goback.style.display = 'block';
+                // goback.addEventListener('click', function ())
+            } else {
+                goback.style.display = 'none';
+            }
+        })
+    </script>
+</body>
+
+</html>

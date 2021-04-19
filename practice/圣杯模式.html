@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var inherit = function () {
+            var F = function () { };
+            return function (target, origin) {
+                F.prototype = origin.prototype;    //共享原型
+                target.prototype = new F();
+                // 上两行与下注释的两行实现效果一致
+                // F.prototype = new origin();
+                // target.prototype = F.prototype;
+                target.constructor = target;       //修改 constructor
+                target.prototype.uber = origin.prototype;     //记录共享原型
+            }
+        }
+        function Father() { }
+        function Son() { }
+        Father.prototype.name = 'ldh';
+        Father.prototype.like = 'song';
+        inherit()(Son, Father);
+        Son.prototype.age = 20;
+        var father = new Father();
+        var son1 = new Son();
+        var son2 = new Son();
+        console.log(father.name);      // ldh
+        console.log(son1.name);         // ldh
+        console.log(father.age);       // undefined
+        console.log(son1.age);          // 20
+        console.log(son1.uber);         // {name: "ldh", like: "song", constructor: ƒ Father()}
+        console.log(son1.uber.like);    // song
+        console.log("-----------");
+        son1.name = 'zxy';
+        console.log(son1.name);
+        console.log(son2.name);
+
+
+    </script>
+</body>
+
+</html>

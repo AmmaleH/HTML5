@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- //5秒之后自动跳转页面 -->
+    <button>按钮</button>
+    <div></div>
+    <script>
+        var div = document.querySelector('div');
+        var time = 5;
+        fn();
+        var timer = setInterval(fn, 1000);
+        function fn() {
+            if (time == 0) location.href = 'https://www.baidu.com';
+            else div.innerHTML = '还剩余' + time-- + '秒自动跳转页面';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example41-50</title>
+</head>
+<script>
+    console.log("--------41-------");
+    console.log(!!null);  // true
+    console.log(!!'');  // true
+    console.log(!!1);   // true
+
+    console.log("--------42-------");
+    // setInterval 方法的返回值是什么？
+    console.log(setInterval(() => console.log('Hi'), 1000));  // 1
+    // 返回的是一个唯一的ID，可用于计时器的清除
+
+    console.log("--------43-------");
+    console.log([...'Lydia']);  //['L', 'y', 'd', 'i', 'a']
+    const [first43, second43, ...rest43] = [1, 2, 3, 4, 5];
+    // const [...a, b] = [1, 2, 3, 4];   // 会报错，...a 必须在最后面
+    // console.log(a);                   // 即扩展运算符必须在最后面
+    // console.log(b);
+    console.log(first43);    // 1
+    console.log(second43);   // 2
+    console.log(rest43);     // [3, 4, 5]
+    // 字符串在扩展运算符的作用下，可以展开成单个字符组成的数组
+    // 其他用处： 要去除数组中的前几个，后面的可以用 (...) 来表示剩余的数组。
+
+    console.log("--------44-------");
+    function* generator44(i) {
+        yield i;
+        yield i * 2;
+    }
+    const gen44 = generator44(10);
+    console.log(gen44.next().value);  // 10
+    console.log(gen44.next().value);  // 20
+
+    console.log("--------45-------");
+    const firstPromise45 = new Promise((res, rej) => {
+        setTimeout(res, 500, "one");
+    })
+    const secondPromise45 = new Promise((res, rej) => {
+        setTimeout(res, 100, "two");
+    })
+    Promise.race([firstPromise45, secondPromise45]).then((res, resj) => {
+        console.log(res);      // two
+    });
+    // 注：event loop 规则中，setTimeout 谁时间短谁先执行。
+    // Promise.race([firstPromise45, secondPromise45]) 中哪个 Promise 对象结果获得的快，
+    // 就返回那个结果，不管结果本身是成功状态还是失败状态。
+
+    console.log("--------46-------");
+    let person46 = { name: "Lydia" };
+    const members46 = [person46];
+    person46 = null;
+    console.log(members46);   // [{ name: "Lydia"}]
+    members46[0] = { age: 21 };
+    // 修改 person46 只是指针不再指向 {name: "Lydia"} 的内存地址，
+    // {name: "Lydia"} 并未改变
+
+    console.log("--------47-------");
+    const person47 = {
+        name: "Lydia",
+        age: 21
+    }
+    for (const item in person47) {
+        console.log(item);  // name age
+    }
+
+    console.log("--------48-------");
+    console.log(3 + 4 + '5');    // 75
+    // 加号的执行顺序是左到右，先执行3 + 4，得 7，+ '5'时，7 会隐式转换成字符串类型，得75
+
+    console.log("--------49-------");
+    console.log(parseInt("-80 * 6", 10));   // 7
+    // 通过parseInt()进行字符串转数值时，遇到第一个非数字字符就停止解析。
+    // 第一个字符为非数字时（除 - +），返回 NaN
+
+    console.log("--------50-------");
+    var res50 = [1, 2, 3].map(num => {
+        if (typeof num === "number") return;
+        return num * 2;
+    });
+    console.log(res50);   // [undefined, undefined, undefined]
+    // if 条件都成立，但每个返回没有返回值，即 undefined
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            margin: 50px;
+            width: 300px;
+            height: 320px;
+            background-color: pink;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- //获取鼠标在盒子中的坐标 -->
+    <div></div>
+    <script>
+        var div = document.querySelector('div');
+        div.addEventListener('mousemove', function (e) {
+            //鼠标移动：mousemove   鼠标点击：click
+            var x = e.pageX - this.offsetLeft;
+            var y = e.pageY - this.offsetTop;
+            this.innerHTML = '鼠标在该盒子中的横坐标是' + x + 'px,纵坐标是' + y + 'px';
+        })
+    </script>
+</body>
+
+</html>

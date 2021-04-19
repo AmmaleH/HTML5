@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignModel</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 简单工厂模式
+        // 简单的工厂模式可以理解为解决多个相似的问题;
+        function Person(name, age) {
+            var person = new Object();
+            person.name = name
+            person.age = age;
+            person.sing = function () {
+                console.log(this.name);
+            }
+            return person;
+        }
+        var son1 = new Person('ldh', 20);
+        console.log(son1.name);
+        console.log(son1.age);
+        console.log(son1.sing());   //疑问:这里会输出 ldh 和 undefined
+        console.log("-------------------------------");
+
+
+        // 单体模式
+        // 只能创建一个实例
+        var Singleton = function (name) {
+            this.name = name;
+        };
+        Singleton.prototype.getName = function () {
+            return this.name;
+        }
+        // 获取实例对象
+        var getInstance = (function () {
+            var instance = null;
+            return function (name) {
+                if (!instance) {//相当于一个一次性阀门,只能实例化一次
+                    instance = new Singleton(name);
+                }
+                return instance;
+            }
+        })();
+        // 测试单体模式的实例,所以a===b
+        var a = getInstance("aa");
+        var b = getInstance("bb");
+        console.log(a === b);
+
+        // 沙箱模式
+        // 将一些函数放到立即执行函数中，但要用闭包暴露接口，用变量接收暴露的接口，
+        // 在调用里面的值,否则无法使用里面的值
+        let sandboxModel = (function () {
+            function sayName() { };
+            function sayAge() { };
+            return {
+                sayName: sayName,
+                sayName: sayAge
+            }
+        })()
+
+
+        // 发布者订阅模式
+        // 好比我们关注了某一个公众号,然后他对应的有新的消息就会给你推送。
+        // 实现逻辑是用数组存储订阅者，发布者回调函数里面通知的方式时遍历订阅者数组，并将发布者内容存入订阅者数组。
+        var shoeObj = {};
+        shoeObj.list = [];
+        // 将方法 fn （不同的订阅者）放入 list 中
+        shoeObj.listen = function (fn) {
+            shoeObj.list.push(fn);
+        }
+        // 发布消息
+        shoeObj.trigger = function () {
+            for (var i = 0, fn; fn = this.list[i++];) {
+                fn.apply(this, arguments);
+            }
+        }
+        // 订阅者1
+        shoeObj.listen(function (color, size) {
+            console.log("颜色是：" + color);
+            console.log("尺码是：" + size);
+        });
+        // 订阅者2
+        shoeObj.listen(function (color, size) {
+            console.log("第二个的颜色是：" + color);
+            console.log("第二个的尺码是：" + size);
+        })
+        shoeObj.trigger("red", 40);
+        shoeObj.trigger("black", 42);
+
+
+    </script>
+</body>
+
+</html>

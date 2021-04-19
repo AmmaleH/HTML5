@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px 20px;
+            border: 1px solid red;
+        }
+
+        .son {
+            position: absolute;
+            left: 0;
+            right: 0;
+            /* top: 0;
+            bottom: 0; */
+            margin: auto;
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <script>
+
+        // mouseover 和 mouseenter 的对比，前者冒泡，后者不
+        // var son = document.querySelector('.father');
+        // son.addEventListener('mouseenter', function (e) {
+        //     console.log(1);
+        // })
+
+        // 测试严格模式
+        // function Foo() {
+        //     // 'use strict'
+        //     console.log(this.location);
+        // }
+        // Foo();
+
+
+        // var m = 1, j = k = 0;
+        // function add(n) {
+        //     return n = n + 1;
+        // }
+        // y = add(m);
+        // console.log(y);
+        // function add(n) {
+        //     return n = n + 3;
+        // }
+        // z = add(m);
+        // console.log(z);
+
+        // var a = 10;
+        // function a() { }
+        // console.log(typeof a)
+
+        // void ();
+
+        //测试对象原型
+        // class Person {
+        //     constructor(name, age) {
+        //         this.uname = name;
+        //         this.age = age;
+        //     }
+        // }
+        // var aa = new Person('aaa', 20);
+        // console.log(aa.__proto__.__proto__.__proto__);
+
+
+        //测试作用域
+        // aa1();
+        // console.log(x2);
+        // console.log(x1);
+        // function aa1() {
+        //     var x1 = 9;
+        //     x2 = 9;
+        //     console.log(x1);
+        //     console.log(x2);
+        // }
+        // console.log(x3);
+        // var x3 = 3;
+        // 块级作用域
+        // for (var i = 0; i < 1; i++) {
+        //     var testNum1 = 9;
+        //     let testNum2 = 99;
+        // }
+        // console.log(testNum1);
+        // console.log(testNum2);
+
+        //测试function* 的传递参数    generator
+        //记住：有几个yield就能返回几个返回值
+        // function* creationIterator() {
+        //     //yield的作用可以理解为：
+        //     //1.返回yield后边的表达式的值；
+        //     //2.当yield后面有变量时，可以接收参数（仅仅是将接收的参数直接赋值给前面的变量）
+        //     let first = yield 1;
+        //     let second = yield first + 2; // 4+2 first=4是next(4)将参数赋给上一条的first
+        //     yield second + 3;             //此处next(5)将5传给second，至此，first为4，second为5
+        //     yield first + second;
+        // }
+        // let iterator = creationIterator();
+        // console.log(iterator.next());
+        // console.log(iterator.next(4));
+        // console.log(iterator.next(5));
+        // console.log(iterator.next(10, 13));
+        // console.log(iterator.next());
+
+        //测试 keys() 方法
+        // var anObj = { 100: 'a', 2: 'b', 98: 'c', 89: 'd' };
+        // //keys() 方法会将属性排序（升序）后输出
+        // console.log(Object.keys(anObj));     //["2", "89", "98", "100"]
+        // var myObj = Object.create({}, {
+        //     getFoo: {
+        //         value: function () { return this.foo; }
+        //     }
+        // });
+        // myObj.foo = 1;
+        // //myObj这个对象中一共有两个属性，getFoo、foo。keys()方法会先输出索引为 1 的属性
+        // console.log(Object.keys(myObj));
+
+        // 测试 map()、parseInt()两个方法
+        // map(currentValue, index) 遍历数组，第一个值为当前数组元素，第二个值为当前元素对应的索引
+        // parseInt(value, radius) 将字符串转换为相对应的整数，第二个参数是基数，即以几进制来进行转换，最后再转换成十进制进行输出。
+        // radius 接收的是map() 中的 index 参数，0 表示十进制
+        // console.log(['1', '2', '3'].map(parseInt));   //[1, NaN, NaN]
+
+        // 函数柯里化
+        // 函数柯里化指的是将一个接收多个参数的函数，变为接收一个参数返回一个函数的固定形式，这样便于再次调用
+        // 函数柯里化指的是将能够接收多个参数的函数转化为接收单一参数的函数，
+        // 并且返回接收余下参数且返回结果的新函数的技术。
+        // let add = function (a) {
+        //     return function (b) {
+        //         return a + b;
+        //     }
+        // }
+        // // 此处进行了两次函数调用
+        // const add1 = add(1);
+        // console.log(add1);    // f(b) { return a + b; }
+        // console.log(add1(2));   // 3
+
+        // 测试变量的赋值
+        // var a = { n: 1 };
+        // var b = a;
+        // a.x = a = { n: 2 };
+        // console.log(a.x)
+        // console.log(b.x)
+
+        // 测试比较对象是否相等
+        // 在比较相等性，原始类型通过它们的值进行比较，而对象通过它们的引用进行比较。
+        // JavaScript检查对象是否具有对内存中相同位置的引用。
+        // 我们作为参数传递的对象和我们用于检查相等性的对象在内存中位于不同位置，所以它们的引用是不同的。
+        // function checkAge(data) {
+        //     if (data === { age: 18 }) {
+        //         console.log("You are an adult!");
+        //     } else if (data == { age: 18 }) {
+        //         console.log("You are still an adult.");
+        //     } else {
+        //         console.log(`Hmm.. You don't have an age I guess`);
+        //     }
+        // }
+        // checkAge({ age: 18 });
+
+        // example 3
+        // var a = {}, b = { key: '123' }, c = { key: '456', val: 'aaa' }, d = Symbol('123'), e = Symbol('123');
+        // // b 不是字符串也不是 Symbol 类型，需要转换成字符串。
+        // // d 与 e 为Symbol类型，不存在两个相同的Symbol类型的值
+        // // 对象类型会调用 toString 方法转换成字符串 [object Object]。
+        // a[b] = 'b';
+        // // c 不是字符串也不是 Symbol 类型，需要转换成字符串。
+        // // 对象类型会调用 toString 方法转换成字符串 [object Object]。这里会把 b 覆盖掉。
+        // a[c] = 'c';
+        // a[d] = 'd';
+        // a[e] = 'e';
+        // console.log(a);
+        // // 输出 c
+        // console.log(a[b]);
+
+        // 类和原型对象
+        // 一般公共的属性定义到构造函数里，公共的方法定义在原型对象上
+        // function Star(uname, age,) {
+        //     this.uname = uname;
+        //     this.age = age;
+
+        //     Starr.prototype.sing = function () {
+        //         console.log("song");
+        //     }
+        // }
+
+        // 继承
+        // 在 JS 中，继承通常指的便是 原型链继承，也就是通过指定原型，并可以通过原型链继承原型上的属性或者方法。
+        // var inherit = (function (c, p) {
+        //     var F = function () { };
+        //     return function (c, p) {
+        //         F.prototype = p.prototype;
+        //         c.prototype = new F();
+        //         c.uber = p.prototype;
+        //         c.prototype.constructor = c;
+        //     }
+        // })();
+
+        // 工厂模式创建对象 （一共有 4 中方式：字面量、Object、构造函数、工厂模式）
+        // function createPerson(name) {
+        //     var o = new Object();
+        //     o.name = name;
+        //     return o;
+        // }
+        // var aa = createPerson('aa');
+        // console.log(aa);
+
+        // 测试querySelector能否获取js动态生成的标签
+        // 前后两个 querySelector 都无法获取js动态生成的 div
+        // var getDiv1 = document.querySelector('div');
+        // console.log(getDiv1);
+        // var div = document.createElement('div');
+        // div.setAttribute('index', '1');
+        // document.body.appendChild(div);
+        // var getDiv2 = document.querySelector('div');
+        // console.log(getDiv2);
+
+        // 测试对象的数据属性与访问器属性
+        // var aaa = {
+        //     age: 20,
+        //     song() {
+        //         console.log('music');
+        //     },
+        //     sayName: function () {
+        //         console.log("my name");
+        //     }
+        // }
+        // console.log(aaa.sayName());
+        // Object.defineProperty(aaa, 'age', {
+        //     Enumerable: false
+        // });
+        // console.log(aaa.age);
+        // var b = {};
+        // Object.assign(b, aaa);
+        // console.log(b);
+        // b.age = 22;
+        // console.log(aaa);
+        // console.log(aaa.song);
+        // console.log(b);
+        // console.log(aaa.age === b.age);
+        // console.log(aaa.sayName === b.sayName);
+        // console.log(NaN == NaN);
+
+        // 递归判断多个值是否相等
+        // function recurCheckEqual(test, ...rest) {
+        //     return Object.is(test, rest[0]) && (rest.length > 2 || recurCheckEqual(...rest));
+        // }
+
+        // 测试是否相等
+        // var s1 = "qwer";
+        // var s2 = "qw" + "er";
+        // console.log(s1 == s2);
+        // // console.log(s1.equals(s2));   // js中没有equals()
+        // var a = 1;
+        // var b = a;
+        // b = 3;
+        // console.log(a);
+        // console.log(b);
+
+        //测试是否可被删除
+        // 利用关键字（var、let、const）声明的对象 configuration:false
+        // const a123 = "abc";
+        // let b123 = 2;
+        // var c123 = 4;
+        // d123 = 5;
+        // console.log(delete a123);
+        // console.log(delete b123);
+        // console.log(delete c123);
+        // console.log(delete d123);
+
+        // 闭包测试
+        function Module1() {
+            var msg = 'Hello';
+            function toUpperCase() {
+                console.log(msg.toUpperCase());
+            }
+            function toLowerCase() {
+                console.log(msg.toLowerCase());
+            }
+            return {
+                toUp: toUpperCase(),
+                toLow: toLowerCase()
+            };
+        }
+        // (function () {
+        //     var msg = 'Hello';
+        //     function toUpperCase() {
+        //         console.log(msg.toUpperCase());
+        //     }
+        //     function toLowerCase() {
+        //         console.log(msg.toLowerCase());
+        //     }
+        //     window.module2 = {
+        //         toUp: toUpperCase(),
+        //         toLow: toLowerCase()
+        //     }
+        // })();
+        var module1 = Module1();
+        module1.toUp;
+        module1.toLow;
+        // function f1() {
+        //     var a = 2;
+        //     function f2() {
+        //         a++;
+        //         console.log(a);
+        //     }
+        //     function f3() {
+        //         a--;
+        //         console.log(a);
+        //     }
+        //     return {
+        //         f2: f2(),
+        //         f3: f3()
+        //     };
+        // }
+        // f1();
+        // f1();
+        // function fun(n, v) {
+        //     console.log(v);
+        //     return {
+        //         fun: function (m) {
+        //             return fun(m, n);
+        //         }
+        //     }
+        // }
+        // var a = fun(0);
+        // a.fun(1);
+        // a.fun(2);
+        // var b = fun(0).fun(1).fun(2);
+        // console.log(b);
+        // function showDelay(msg, time) {
+        //     setTimeout(function () {
+        //         console.log(msg);
+        //     }, time);
+        // }
+        // showDelay('hello', 2000);
+    </script>
+
+</body>
+
+</html>

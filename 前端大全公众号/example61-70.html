@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>example61-70</title>
+</head>
+
+<body>
+    <script>
+        console.log("--------61-------");
+        const person61 = { name: "Lydia" };
+        Object.defineProperty(person61, "age", { value: 21 });
+        console.log(person61);       // {name: "Lydia", age: 21}
+        console.log(Object.keys(person61));   // name
+        //Object.defineProperty()定义的属性默认enumerable、writable、configuration都为false
+        // 而 Object.keys()只会遍历 enumerable 为 true 的属性
+
+        console.log("--------62-------");
+        const settings62 = {
+            username: "lydiahallie",
+            level: 19,
+            health: 90
+        };
+        const data62 = JSON.stringify(settings62, ["level", "health"]);
+        console.log(data62); "{'level': 19, 'health': 90}"
+        // JSON.stringify()中第二个可选参数 replacer：
+        // 该参数为一个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理；
+        // 该参数为一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的JSON字符串中；
+        // 该参数为 null 或省略，择对象所有的属性都会被序列化。
+
+        console.log("--------63-------");
+        let num63 = 10;
+        const increaseNumber63 = () => num63++;
+        const increasePassedNumber63 = number => number++;
+        const num63_1 = increaseNumber63();
+        const num63_2 = increasePassedNumber63(num63_1);
+        console.log(num63_1);     // 10
+        console.log(num63_2);     // 10
+        // 原因只是自增在后
+
+        console.log("--------64-------");
+        const value64 = { number: 10 };
+        const multiply64 = (x = { ...value64 }) => {
+            console.log(x.number *= 2);
+        }
+        multiply64();            // 20
+        multiply64();            // 20
+        multiply64(value64);     // 20
+        multiply64(value64);     // 40
+        // 前两个相当于把 value复制给x，对x进行操作不会影响vlaue,
+        // 后两个为引用传递，会改变原对象的值
+
+        console.log("--------65-------");
+        [1, 2, 3, 4].reduce((x, y) => console.log(x, y));
+        // 输出为：1 2 和 undefined 3 和 undefined 4
+        // reduce()的详解见第40题
+        // callback 中的第一个参数 previousValue ，当没有返回值时，会为undefined
+
+        console.log("--------66-------");
+        // 问：使用哪些构造函数可以成功继承 Dog66 类
+        class Dog66 {
+            constructor(name) {
+                this.name = name;
+            }
+        }
+        class Labrador66 extends Dog66 {
+            // 1
+            // constructor(name, size) {
+            //     this.size = size;
+            // }
+            // // 2
+            // constructor(name, size) {
+            //     super(name);
+            //     this.size = size;
+            // }
+            // // 3
+            constructor(size) {
+                super(name);
+                this.size = size;
+            }
+            // // 4
+            // constructor(name, size) {
+            //     this.name = name;
+            //     this.size = size;
+            // }
+        }
+        // 2、3 B
+        var child1 = new Dog66("dage");
+        var child = new Labrador66("aa", "big");    // {name: "", size: "big"}
+        console.log(child);
+        // 注：在子类中，在调用 super 之前不能访问到 this 关键字，否则会抛出ReferenceError，
+        // 1 和 4 会引发一个引用错误
+        // 3 不会报错，但继承的父类的 name属性无法赋值，一直为空字符串
+        // 2 是正确完成的写法
+
+        console.log("--------67-------");
+        // 问：输出是什么？
+        // index.js
+        // console.log('running index.js');
+        // import { sum } from './sum.js';
+        // console.log(sum(1, 2));
+        // sum.js
+        // console.log('running sum.js');
+        // export const sum = (a, b) => a + b;
+        // 输出：running sum.js, running index.js, 3
+        // 注：import会被提升到代码最前面
+
+        console.log("--------68-------");
+        console.log(Number(2) === Number(2));           // true
+        console.log(Boolean(false) === Boolean(false)); // true
+        console.log(Symbol('foo') === Symbol('foo'));   // false
+        console.log(String('aa') === String('aa'));     // true
+
+        console.log("--------69-------");
+        const name69 = "Lydia Hallie";
+        console.log(name69.padStart(14, 2));   // "22Lydia Hallie"
+        console.log(name69.padStart(2));    // "Lydia Hallie"
+        // String.padStart(targetLength, padString)
+        // 用指定字符(padStart)补齐指定长度(targetLength)，在左边进行填充
+        // targetLength <= String.length 则返回原字符串（String）
+        // padString 省略则为空格
+    </script>
+</body>
+
+</html>

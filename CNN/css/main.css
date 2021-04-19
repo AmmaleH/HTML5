@@ -1,0 +1,14 @@
+/* 修改container的最大宽度 */
+/* @media screen and (min-width: 1280px) {
+    .container {
+        width: 1280px;
+    }
+} */
+
+.aaa {
+    /* width: 200px; */
+    height: 200px;
+    margin: 20px 0;
+    background: skyblue;
+    border: 1px solid red;
+}

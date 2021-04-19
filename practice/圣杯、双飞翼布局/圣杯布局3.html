@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣杯布局position</title>
+    <!-- position -->
+    <!-- 思路：用绝对定位把left、right定在左右两边，middle不设置position，注意子绝父相 -->
+    <style>
+        .container {
+            position: relative;
+            background-color: #eee;
+        }
+
+        .left {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            left: 0;
+            top: 0;
+        }
+
+        .right {
+            position: absolute;
+            width: 200px;
+            height: 240px;
+            background-color: greenyellow;
+            right: 0;
+            top: 0;
+        }
+
+        .middle {
+            height: 200px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <h4>左边栏</h4>
+        </div>
+        <div class="right">
+            <h4>右边栏</h4>
+        </div>
+        <div class="middle">
+            中间弹性区,好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。
+            好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。好好学习天天向上。
+            好好学习天天向上。好好学习天天向上。好好学习天天向上。
+        </div>
+    </div>
+</body>
+
+</html>

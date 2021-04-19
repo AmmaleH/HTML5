@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        // 函数防抖关注一定时间连续触发的事件只执行最后一次，而函数节流侧重于一段时间内只执行一次。
+
+        // debounce (防抖)
+        // 出发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次触发，，则重新计算时间
+        // 防抖常应用于用户进行搜索输入节约请求资源，window 触发 resize 事件时进行防抖只触发一次。
+        const debounce = (fn, time) => {
+            let timeout = null;
+            return function () {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    fn.apply(this, arguments);
+                }, time);
+            }
+        }
+
+        // throttle (节流)
+        // 高频事件触发，但 n 秒内只会执行一次，所以节流会稀释函数的执行效率。
+        // 节流常应用于鼠标不断点击触发、监听滚动事件。
+        const throttle = (fn, delay) => {
+            let sign = true;
+            return function () {
+                if (!sign) return;  // sign 为 false 时，表示当前还有 fn 在执行队列中，直接返回
+                sign = false;       // fn 进执行队列，在 delay 后才执行，故置 sign 为 false
+                setTimeout(() => {
+                    fn.apply(this, arguments);
+                    sign = true;   // 在delay后执行完fn之后将sign置为true，此时throttle触发可以进入计时器
+                }, delay);
+            }
+        }
+    </script>
+</body>
+
+</html>
