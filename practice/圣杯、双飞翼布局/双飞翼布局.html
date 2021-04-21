@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双飞翼1</title>
+    <!-- 双飞翼布局的基本思想：
+        1.中 里面再嵌一个inner盒子，中、左、右全部左浮（一定记住要先设置中间）；
+        2.inner盒子设置左右外边距（分别为左右盒子的宽度），给左右盒子留出宽度；
+        3.中 盒子设置的 width:100% 会把左右盒子挤到下一行显示；所以左盒子margin-left:-100%,
+            margin的百分比是相对于父盒子的宽度来计算的，这样使左盒子移动到中盒子同一行的最左边。
+            右盒子在左盒子移到中盒子那一行之后，会在中盒子下一行的最靠左显示，所以设置其margin-left
+            为负的右盒子宽度值，以移动到中盒子那一行的最右边。
+        总结：关键是中盒子的inner给左右盒子留出了宽度。
+    -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main,
+        .left,
+        .right {
+            float: left;
+            height: 200px;
+            background-color: pink;
+        }
+
+        .main {
+            width: 100%;
+        }
+
+        .main-inner {
+            margin-left: 200px;
+            margin-right: 210px;
+        }
+
+        .left {
+            margin-left: -100%;
+            width: 200px;
+            background-color: skyblue;
+        }
+
+        .right {
+            margin-left: -210px;
+            width: 210px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="main-inner">这是中间。好好学习天天向上！！！
+            好好学习天天向上！！！好好学习天天向上！！！
+            好好学习天天向上！！！好好学习天天向上！！！
+            好好学习天天向上！！！好好学习天天向上！！！好好学习天天向上！！！</div>
+    </div>
+    <div class="left"></div>
+    <div class="right"></div>
+</body>
+
+</html>
