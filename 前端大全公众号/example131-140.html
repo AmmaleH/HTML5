@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>131-140</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+
+        console.log("--------------135--------------");
+        const handler = {
+            set: () => console.log("Add"),
+            get: () => console.log("get"),
+        };
+        const person = new Proxy({}, handler);
+        // 使用Proxy对象时，第一个参数表示赋给person的值（此处为一个空对象），
+        // 第二个参数表示传递一个包含以下属性的对象handler：set和get。
+        // 当设置属性时，set被调用；当获取属性时，get被调用。
+        person.name = "Lydia";
+        person.name;
+    </script>
+</body>
+
+</html>

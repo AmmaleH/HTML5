@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axiosWithVue</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            width: 300px;
+            height: 200px;
+            margin: auto;
+        }
+
+        .getJoke {
+            margin-left: 20px;
+        }
+
+        .joke {
+            width: 300px;
+            height: 200px;
+            border: 1px dotted red;
+            margin: 10px 20px;
+            box-shadow: 3px 2px 6px 8px #fde;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="joke">{{ jokeMsg }}</div>
+        <input type="button" value="日常一笑" class="getJoke" v-on:click="getJoke">
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                jokeMsg: "",
+            },
+            methods: {
+                getJoke: function () {
+                    var _this = this;
+                    axios.get("https://autumnfish.cn/api/joke")
+                        .then(function (res) {
+                            // axios回调函数中this已经改变，无法访问到data中数据
+                            // 要先保存或者用箭头函数,箭头函数里面的 this 指向上下文。
+                            // 
+                            _this.jokeMsg = res.data;
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

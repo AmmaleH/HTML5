@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*  列表不需要前面小圆点 所有的li都需要去掉 */
+        li {
+            list-style: none;
+        }
+
+        .box {
+            width: 280px;
+            height: 163px;
+            border: 1px solid grey;
+            margin: 100px auto;
+        }
+
+        .box h3 {
+            height: 32px;
+            border-bottom: 1px dotted grey;
+            font-size: 14px;
+            font-weight: 400;
+            /* 垂直居中 */
+            line-height: 32px;
+            /* 不用margin 可以查看效果
+                没有设置宽度 ， 不会撑大盒子  应该只是宽度？不会被撑开？ */
+            padding-left: 15px;
+        }
+
+        .box ul li a {
+            /* a 是单独设置的 */
+            /* font-size: 12px; */
+            color: #666;
+            text-decoration: none;
+        }
+
+        .box ul li:hover {
+            text-decoration: underline;
+        }
+
+        .box ul li {
+            /* 用尺子量一量，两个盒子之间的距离  一行字的最下面到另一行的最下面*/
+            height: 23px;
+            line-height: 23px;
+            padding-left: 15px;
+            /* font-size: 12px; */
+        }
+
+        .aa {
+            font-size: 12px;
+        }
+
+        .box ul {
+            margin-top: 7px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h3>品优购快报</h3>
+        <ul>
+            <!-- ul>li*5>a   shift + alt 可以定一长列位置 -->
+            <li><a class="aa" href="#" style="font-size: 12px;"></a>【特惠】爆款耳机5折秒</li>
+            <li><a class="aa" href="#"></a>【特惠】母亲节，健康好礼低至5折!</li>
+            <li><a class="aa" href="#"></a>【特惠】爆款耳机5折秒!</li>
+            <li><a class="aa" href="#"></a>【特惠】9.9元洗100张照片</li>
+            <li><a class="aa" href="#"></a>【特惠】长虹智能空调立省1000！</li>
+        </ul>
+    </div>
+</body>
+
+</html>

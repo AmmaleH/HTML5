@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排他思想</title>
+    <style>
+        li {
+            list-style: none;
+            background-color: hotpink;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ul>
+    <script>
+        var ul = document.querySelector("ul");
+        ul.addEventListener("click", function (e) {
+            e.target.style.backgroundColor = "blue";
+            console.log(e.target);
+        });
+    </script>
+</body>
+
+</html>

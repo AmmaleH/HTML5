@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>musicWithVue</title>
+    <link rel="stylesheet" type="text/css" href="../iconfont/iconfont.css">
+    <link rel="stylesheet" href="css/music1.css">
+</head>
+
+<body>
+    <div class="play-wrap" id="music1">
+
+        <header class="head">
+            <span>好音乐</span>
+            <input type="text" class="search" @keyUp.enter="getMusic" v-model="music" placeholder="输入你想听的歌">
+        </header>
+
+        <section class="main">
+            <div class="playmain">
+                <img v-bind:src="coverUrl" alt="" v-bind:class="{playImg:isPlaying}">
+            </div>
+            <div class="left">
+                <ul>
+                    <li v-for="item in musicList">
+                        <i class="iconfont befCon" @click="playMusic(item.id)">&#xe60a;</i>
+                        {{item.name}}
+                        <i class="iconfont afCon" v-if="item.mvid!=0" @click="playMv(item.mvid)">&#xe607;</i>
+                    </li>
+                </ul>
+            </div>
+            <div class="right">
+                <div style="margin: 10px"><strong>热门留言</strong></div>
+                <!-- <div>{{commentList}}</div> -->
+                <dl v-for="item in commentList">
+                    <dt><img v-bind:src="item.user.avatarUrl" alt=""></dt>
+                    <dd class="username">{{item.user.nickname}}</dd>
+                    <dd class="detail">{{item.content}}</dd>
+                </dl>
+            </div>
+
+        </section>
+
+        <div class="mv-control" @click="hide" v-show="isShow" style="display:none;">
+            <video v-bind:src="mvUrl" controls="controls"></video>
+            <!-- <div @click="hide" class="mask"></div> -->
+        </div>
+
+        <footer>
+            <audio v-show="!isShow" v-bind:src="musicUrl" @play="play" @pause="pause" controls="controls"
+                autoplay="autoplay" loop="loop" class="myaudio"></audio>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/music1.js"></script>
+</body>
+
+</html>

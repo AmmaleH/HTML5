@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind</title>
+    <style>
+        img {
+            width: 200px;
+        }
+
+        .active {
+            border: 1px dashed red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-bind简写可只用写一个 : -->
+    <div id="app">
+        <img v-bind:src="img1" alt="">
+        <br>
+        <img :src="img2" alt="" :title="titleMsg2+'!!!'">
+        <br>
+        <img :src="img3" alt="" :class="isactive? 'active':'' " @click="toggleActive">
+        <br>
+        <img :src="img4" alt="" :class="{active:isactive}" @click="toggleActive">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                "img1": "../images/universe1.jpg",
+                "img2": "../images/universe2.jpg",
+                img3: "../images/universe3.jpg",
+                img4: "../images/universe4.jpg",
+                titleMsg2: "图片2",
+                isactive: false,
+            },
+            methods: {
+                toggleActive: function () {
+                    this.isactive = !this.isactive;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

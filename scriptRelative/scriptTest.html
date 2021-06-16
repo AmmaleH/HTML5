@@ -354,6 +354,32 @@
         //     }, time);
         // }
         // showDelay('hello', 2000);
+        function Animal(name) {
+            this.name = name;
+        }
+
+        let dog = new Animal('dog');
+
+        console.log(dog.prototype);
+        console.log(dog.__proto__);
+        console.log(Animal.prototype.__proto__);
+        console.log(Animal.prototype);
+
+        //以下代码的打印顺序是--------------------------
+        let p = new Promise((resolve, reject) => {
+            resolve(1);
+            console.log(2);
+        });
+
+        setTimeout(() => console.log(3));
+
+        p.then(res => {
+            console.log(res);
+            return 4;
+        }).then(res => {
+            console.log(res);
+        })
+
     </script>
 
 </body>

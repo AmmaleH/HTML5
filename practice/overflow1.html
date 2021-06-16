@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>overflow1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .first {
+            height: 300px;
+            width: 800px;
+            margin: auto;
+            background-color: red;
+        }
+
+        .second {
+            height: 600px;
+            width: 800px;
+            margin: auto;
+            /* 给父元素加边框也可以解决塌陷的问题 */
+            border: 1px solid red;
+        }
+
+        .product {
+            height: 100px;
+            width: 150px;
+            margin-top: 20px;
+            margin-left: 30px;
+            /* 给子元素设置上边距，却出现该外边距被加载在父元素上了 */
+            /* 加上 display:inline-block 可以解决父元素上边距塌陷的问题 */
+            /* display: inline-block; */
+
+            /* overflow: hidden; */
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="first">盒子1</div>
+    <div class="second">
+        <div class="product">1</div>
+        <!-- <div class="product">2</div>
+        <div class="product">3</div>
+        <div class="product">4</div> -->
+    </div>
+</body>
+
+</html>

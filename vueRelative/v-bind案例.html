@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind案例</title>
+    <style>
+        img {
+            width: 200px;
+        }
+
+        .visible1 {
+            visibility: hidden;
+        }
+
+        .visible2 {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-show后面是条件判断，true则为display:block,false则为display:none -->
+    <!-- 本案例中用v-show在显示时有小bug,“前一张”的button消失时，“后一张会顶替过来” -->
+    <!-- 用visibility可以隐藏但还会占住之前的位置 -->
+    <div id="app">
+        <img :src="arr[index]" alt="">
+        <button :class="{visible1:isVisible1}" @click="prev">前一张</button>
+        <button :class="{visible2:isVisible2}" @click="next">后一张</button>
+        <!-- <button  @click="prev" v-show="index != 0">前一张</button>
+        <button @click="next" v-show="index != 6">后一张</button> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                isVisible1: false,
+                isVisible2: false,
+                arr: [
+                    "../images/universe1.jpg",
+                    "../images/universe2.jpg",
+                    "../images/universe3.jpg",
+                    "../images/universe4.jpg",
+                    "../images/universe5.jpg",
+                    "../images/universe6.jpg",
+                    "../images/universe7.jpg",
+                ],
+                index: 0,
+            },
+            methods: {
+                prev: function () {
+                    if (this.index > 0) {
+                        this.img1 = this.arr[--this.index];
+                    }
+                    if (this.index == 0) {
+                        this.isVisible1 = true;
+                        this.isVisible2 = false;
+                    }
+                },
+                next: function () {
+                    if (this.index < this.arr.length - 1) {
+                        this.img1 = this.arr[++this.index];
+                    }
+                    if (this.index == this.arr.length - 1) {
+                        this.isVisible2 = true;
+                        this.isVisible1 = false;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -6,22 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vue基础1</title>
+    <style>
+        #test span[class="bindClass1"] {
+            background-color: red;
+        }
+    </style>
 </head>
 
 <body>
     <div id="test">
         <!-- v-text 、v-html会把标签里面的内容全部替换 -->
-        <div v-text="message1 + '!!!'" id="first">
+        <!-- v-html会将vue中属性的值解析成html元素来处理，而v-text只会作为纯文本来处理 -->
+        <div v-text="message1" id="first">
             <div>hello</div>
         </div>
-        <div v-html="message2">hello</div>
-        <!-- {{}} 只会替换 {{}} 里面的内容 -->
-        <div>{{modelMsg}}</div>
+        <div v-html="message2">hello message2</div>
+        <div v-text="message2">hello message2</div>
+        <!-- {{}} 只会替换 {{}} 里面的内容 插值表达式 -->
+        <div>hello modelMsg {{modelMsg}}</div>
 
         <!-- v-bind用于属性的绑定,替换的是bindClass的值 -->
         <!-- 缩写可写为   :class = "bindClass" 即去掉v-bind -->
         <!-- bindClass可以执行基本运算、函数，支持多种数据类型（数组、对象） -->
         <div v-bind:class="bindClass">v-bind用于属性的绑定</div>
+        <span v-bind:class="{bindClass1:bindSign}">v-bind属性，添加对象动态添加属性</span>
+        <input type="button" value="点击改变前面标签背景" v-on:click="isBind">
 
         <!-- v-model用于在表单<input>、<textarea>元素中创建双向数据绑定 -->
         <!-- v-model 会忽略所有表单元素的 value、checked、selected 特性
@@ -39,9 +48,14 @@
             <button v-on:click="add" style="width:120px">+</button>
         </div>
 
-
-        <button @click="changeShow">显示/隐藏图片</button>
-        <img style="width:400px" v-show="isShow" @click="changeShow" src="../images/wangzhe.jpg" alt="汽车">
+        <!-- v-show v-if 区别： -->
+        <!-- v-if 是动态添加，当值为 false 时，是完全移除该元素，即 dom 树中不存在该元素。 -->
+        <!-- v-show 仅是隐藏 / 显示，值为 false 时，该元素依旧存在于 dom 树中。效率更高  -->
+        <!-- 若其原有样式设置了 display: none 则会导致其无法正常显示。 -->
+        <button @click="changeShow">显示/隐藏图片show</button>
+        <img style="width:400px" v-show="isShow1" @click="changeShow" src="../images/wangzhe.jpg" alt="汽车">
+        <button @click="changeIf">显示/隐藏图片if</button>
+        <img style="width:400px" v-if="isShow2" @click="changeIf" src="../images/hero_kai1.jpg" alt="凯">
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
@@ -51,10 +65,12 @@
                 message1: "干就完了chongchongchong",
                 message2: "<a href='http://www.baidu.com'>hello</a>",
                 message3: "淦",
-                bindClass: "bindIndex",
+                bindClass: "bindindex",
+                bindSign: false,
                 modelMsg: "啥也不写",
                 num: 0,
-                isShow: true
+                isShow1: true,
+                isShow2: true,
             },
             methods: {
                 fn: function () {
@@ -68,7 +84,13 @@
                     this.num++;
                 },
                 changeShow: function () {
-                    this.isShow = !this.isShow;
+                    this.isShow1 = !this.isShow1;
+                },
+                changeIf: function () {
+                    this.isShow2 = !this.isShow2;
+                },
+                isBind: function () {
+                    this.bindSign = !this.bindSign;
                 }
             }
         })
