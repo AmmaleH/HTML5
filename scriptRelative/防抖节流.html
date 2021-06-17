@@ -40,7 +40,7 @@
                 // 此处sign为闭包，可以保存状态信息。
                 sign = false;
                 setTimeout(() => {
-                    fn.apply(this, arguments);
+                    fn.apply(this, arguments); // 箭头函数中的this指向执行上下文，不用箭头函数需先保存this
                     sign = true;   // 在delay后执行完fn之后将sign置为true，此时throttle触发可以进入计时器
                 }, delay);
             }
