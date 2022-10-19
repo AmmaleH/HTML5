@@ -99,6 +99,20 @@
         }
         fn1();
 
+        const p1 = new Promise(function (resolve, reject) {
+            Promise.all([
+                new Promise((r, j) => j()),
+                new Promise((r) => r(3)).then(console.log)
+            ]);
+        });
+        p1.then(function (val) {
+            console.log("成功了");
+        }, function (reason) {
+            console.log("失败了");
+        });
+
+
+
     </script>
 </body>
 

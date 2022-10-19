@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记事本案例</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        h1 {
+            color: red;
+            margin: 30px 0;
+        }
+
+        input {
+            display: block;
+            width: 400px;
+            height: 40px;
+            margin: auto;
+            border: 1px dotted rgb(179, 174, 174);
+            box-shadow: 2px 2px 5px 1px darkgrey;
+        }
+
+        .todo-list {
+            text-align: center;
+        }
+
+        .todo {
+            position: relative;
+            list-style-type: none;
+            text-align: left;
+            line-height: 30px;
+            width: 400px;
+            height: 30px;
+            border: 1px dashed rgb(109, 165, 72);
+            margin: auto;
+        }
+
+        .todo:hover button {
+            visibility: visible;
+        }
+
+        .todo button {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            visibility: hidden;
+        }
+
+        .footer {
+            position: relative;
+            line-height: 40px;
+            width: 400px;
+            height: 40px;
+            margin: auto;
+            padding: 10px 0;
+            border-bottom: 1px solid cyan;
+            box-shadow: 5px 5px 8px 1px rgb(228, 220, 220);
+        }
+
+        /* 左边留白 */
+        .footer::before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+        }
+
+        .footer .clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .footer .clear:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主体区域 -->
+    <section id="todoapp">
+        <!-- 输入框 -->
+        <header class="header">
+            <h1>小胡记事本</h1>
+            <input v-model="inputValue" v-on:keyUp.enter="add" autofocus="sutofocus" autocomplete="off"
+                placeholder="请输入任务" class="new-todo">
+        </header>
+        <!-- 列表区域 -->
+        <section class="main">
+            <ul class="todo-list">
+                <li class="todo" v-for="(item, index) in list">
+                    <div class="view">
+                        <span class="index">{{index + 1}}</span>
+                        <label>{{item}}</label>
+                        <button class="destroy" v-on:click="remove(index)">X</button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <!-- 统计和清空 -->
+        <footer class="footer">
+            <span class="todo-count" v-if="list.length!=0">
+                <strong>{{ list.length }}</strong>
+                item left
+            </span>
+            <span class="clear" v-on:click="clear" v-show="list.length!=0">clear</span>
+        </footer>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#todoapp",
+            data: {
+                list: [
+                    "吃饭", "学习", "睡觉"
+                ],
+                inputValue: "好好学习天天向上",
+            },
+            methods: {
+                add: function () {
+                    this.list.push(this.inputValue);
+                },
+                remove: function (index) {
+                    console.log(index);
+                    this.list.splice(index, 1);    // 删除数组中对应的点击的一个条目
+                },
+                clear: function () {
+                    console.log("clear");
+                    this.list.splice(0);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>经典题1</title>
+</head>
+
+<body>
+    <script>
+        const myPromise = Promise.resolve(Promise.resolve("Promise!"));
+        function funcOne() {
+            myPromise.then(res => res).then(res => console.log(res));
+            setTimeout(() => console.log("Timeout1!", 0));
+            console.log("last line1");
+        }
+        async function funcTwo() {
+            const res = await myPromise;
+            console.log(await res);
+            setTimeout(() => console.log("Timeout2!", 0));
+            console.log("last line2");
+        }
+        funcOne();
+        funcTwo();
+    </script>
+</body>
+
+</html>

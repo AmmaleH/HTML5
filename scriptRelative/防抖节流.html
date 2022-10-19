@@ -21,6 +21,9 @@
             return function () {
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
+                    // 此处用的箭头函数，this是上下文的this。
+                    // 如果计时器的第一个参数用普通函数，则需要在计时器外获取this保存，
+                    // 再在计时器中使用保存的this。
                     fn.apply(this, arguments);
                 }, time);
             }
@@ -33,9 +36,11 @@
             let sign = true;
             return function () {
                 if (!sign) return;  // sign 为 false 时，表示当前还有 fn 在执行队列中，直接返回
-                sign = false;       // fn 进执行队列，在 delay 后才执行，故置 sign 为 false
+                // fn 进执行队列，在 delay 后才执行，故置 sign 为 false
+                // 此处sign为闭包，可以保存状态信息。
+                sign = false;
                 setTimeout(() => {
-                    fn.apply(this, arguments);
+                    fn.apply(this, arguments); // 箭头函数中的this指向执行上下文，不用箭头函数需先保存this
                     sign = true;   // 在delay后执行完fn之后将sign置为true，此时throttle触发可以进入计时器
                 }, delay);
             }

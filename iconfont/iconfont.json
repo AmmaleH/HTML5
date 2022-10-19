@@ -1,0 +1,44 @@
+{
+  "id": "2512865",
+  "name": "vue0426",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "917792",
+      "name": "视频",
+      "font_class": "iconfontduanshipin",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "1025821",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "2237657",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "13646166",
+      "name": "播放",
+      "font_class": "bofang1",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "19689710",
+      "name": "视 频",
+      "font_class": "shipin_huaban1",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    }
+  ]
+}
