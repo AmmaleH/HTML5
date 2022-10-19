@@ -59,6 +59,24 @@
             </div>
         </div>
     </div>
+    <script>
+        function count() {
+            var cycle = 0;
+            var fun = function () {
+                return cycle++;
+            }
+            return fun;
+        }
+        var comein = count();
+        var comeout = count();
+        window.addEventListener("focus", function () {
+            console.log("你第 " + comein() + " 次切进来了！！！");
+        });
+        window.addEventListener("blur", function () {
+            var cycle = count();
+            console.log("你第 " + comeout() + " 次切出去了！！！");
+        })
+    </script>
 
 
 

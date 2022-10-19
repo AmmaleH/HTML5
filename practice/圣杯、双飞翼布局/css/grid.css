@@ -1,0 +1,4 @@
+.part5 .parent {
+    display: grid;
+    grid-template-columns: 300px auto 300px;
+}

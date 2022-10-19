@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌套异步回调</title>
+</head>
+
+<body>
+    <script>
+        // 异步返回值
+        function double(value, callback) {
+            setTimeout(() => {
+                return callback(value * 2);
+            }, 1000);
+        }
+        double(3, (x) => { console.log(`the value processed is ${x}`); });
+
+        function double1(value, success, failure) {
+            setTimeout(() => {
+                try {
+                    if (typeof value !== 'number') {
+                        throw "argument value must be a Number";
+                    }
+                    success(value * 2);
+                } catch (e) {
+                    failure(e);
+                }
+            }, 1000);
+        }
+        const successCallback = (x) => console.log(`success: ${x}`);
+        const failureCallback = (e) => console.log(`failure: ${e}`);
+        double1(5, successCallback, failureCallback);
+
+        const successCallback1 = (x) => {
+            double(x, (y) => {
+                console.log(`success1: ${y}`);
+            })
+        }
+        double1(7, successCallback1, failureCallback);   // 这里有两层嵌套，嵌套增多对调试维护会造成巨大压力
+
+    </script>
+</body>
+
+</html>

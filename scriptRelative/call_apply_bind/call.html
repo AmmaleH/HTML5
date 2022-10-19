@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>call</title>
+</head>
+
+<body>
+    <script>
+        // call 模拟实现
+        Function.prototype.call2 = function (context) {    // 传入第一个参数为要绑定的对象。
+            var context = context || window;    // this 参数为 null 时，视为指向 window。
+            context.fn = this;  // 通过 this 获取调用 call2 的函数，普通方法中的this，谁调用就指向谁。
+            var args = [];   // 获取其余参数
+            for (var i = 1, len = arguments.length; i < len; i++) {
+                // args.push(arguments[i]);
+                args.push("arguments[" + i + "]");
+            }
+            // context.fn(...args);
+            // eval() 会将字符串转换成语句进行执行
+            var res = eval("context.fn(" + args + ")");
+            delete context.fn;
+            return res;
+        }
+        // args.push("arguments[" + i + "]"); + eval("context.fn(" + args + ")");为 ES3 实现
+        // args.push(arguments[i]); + context.fn(...args);为 ES6 实现
+
+        function bar(name, gender) {
+            console.log(this.val);
+            console.log(name);
+            console.log(gender);
+        }
+        var obj = {
+            val: 1,
+            name: "jack",
+            gender: "male",
+        }
+        bar.call2(obj, "Missi", "female");
+        // bar.call2(obj);
+
+    </script>
+</body>
+
+</html>

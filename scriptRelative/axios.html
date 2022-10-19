@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function showJsonp(obj) {
+            console.log(obj.message);
+        }
+        var url = 'http://wwt.natapp1.cc/sell/seller/login?openid=abc';
+        var script = document.createElement('script');
+        script.setAttribute('src', url);
+        script.setAttribute('type', 'text/javascript');
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+        // $.ajax({
+        //     url: 'http://wwt.natapp1.cc/sell/seller/login?openid=abc',
+        //     //  带cookies的请求
+        //     xhrFields: {
+        //         withCredentials: true
+        //     },
+        //     beforeSend: function (request) {
+        //         request.setRequestHeader("Authorization", "ee0128e9-8eaa-4935-af34-3207e4216bd6")
+        //     },
+        //     success: function (res) {
+        //         console.log("success", res)
+        //     },
+        //     error: function (err) {
+        //         console.log('fail', err)
+        //     }
+        // })
+        // axios({
+        //     method: 'post',
+        //     url: 'http://wwt.natapp1.cc/sell/seller/login?openid=abc',
+        //     data: {
+        //     },
+        //     headers: {
+        //         "token": "0d0f4cb7-65a5-4a44-9018-0ec32e02603b",
+        //     }
+        // }).then((res) => {
+        //     console.log(1);
+        // });
+    </script>
+</body>
+
+</html>

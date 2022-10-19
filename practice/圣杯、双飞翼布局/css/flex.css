@@ -1,0 +1,9 @@
+.part4 .parent {
+    display:flex;
+    justify-content: space-between;
+}
+.part4 .center {
+    /* 占满剩余空间,flex-grow默认为0，即存在剩余空间，也不放大 */
+    /* flex 为 flex-grow、flex-shrink、flex-basis 的简写 */
+    flex-grow: 1;   
+}

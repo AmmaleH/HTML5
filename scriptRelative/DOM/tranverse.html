@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遍历所有子节点</title>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="child1" name="name1">child1</div>
+        <div class="child2">child2</div>
+        <div class="child3">
+            <p class="content1">content1</p>
+            <div class="grandChild3-1">grandChild3-1</div>
+        </div>
+    </div>
+    <script>
+        var parent = document.getElementsByName("name1");
+        var parent1 = document.getElementsByTagName("div");
+        console.log(parent);
+        console.log(parent1);
+        var ancent = document.querySelector(".parent");
+        console.log(ancent);
+        var res = [], temp = [], node = null;
+        temp.push(ancent);
+        while (temp.length > 0) {
+            node = temp.shift();
+            let children;
+            if (node) {
+                res.push(node);
+                children = Array.from(node.children);
+                if (children.length) temp = temp.concat(children);
+            }
+        }
+        console.log(res);
+    </script>
+</body>
+
+</html>

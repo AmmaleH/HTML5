@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移除一个整数后的数组最大值</title>
+</head>
+
+<body>
+    <script>
+        // 一个整数数组中移除一个数后，剩下的数按照相对顺序构成的整数最大
+        // 输入：数组， 输出：数组
+        function maxArr(arr) {
+            if (!Array.isArray(arr)) return;
+            let index = -1;
+            let pre = Number.MAX_VALUE, last = Number.MIN_VALUE;
+            arr.some((ele) => {
+                if (ele <= pre) {
+                    index++;
+                    pre = ele;
+                }
+                return ele > pre;
+            });
+            arr.splice(index, 1);
+            return arr;
+        }
+        console.log(maxArr([4, 2, 3, 1]));
+    </script>
+</body>
+
+</html>

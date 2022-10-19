@@ -126,6 +126,32 @@
             /* visibility: visible; */
             content: url(../images/universe5.jpg);
         }
+
+        .flex-twoCol {
+            /* display: flex;
+            align-items: center; */
+            position: relative;
+            width: 500px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px dotted red;
+        }
+
+        .flex-twoCol .flex-left {
+            /* float: left; */
+            width: 200px;
+            height: 100px;
+            background-color: coral;
+        }
+
+        .flex-right {
+            /* flex: 1; */
+            position: absolute;
+            height: 100px;
+            margin-left: 200px;
+            background-color: pink;
+        }
     </style>
 </head>
 
@@ -162,6 +188,11 @@
     <img id="img1" src="../images/gun1.jpg" alt="" width="100" height="100">
     <img id="img2" alt="" width="300px">
     <button id="start">开始</button>
+
+    <div class="flex-twoCol">
+        <div class="flex-left">flex两栏布局的左侧栏</div>
+        <div class="flex-right">flex两栏布局的右侧栏</div>
+    </div>
 </body>
 <script>
     var img2 = document.getElementById("img2");

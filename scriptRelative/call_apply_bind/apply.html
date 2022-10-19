@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>apply</title>
+</head>
+
+<body>
+    <script>
+        // apply 模拟实现
+        // apply() 接收两个参数（不会像 call() 那样参数数量不可知），第二个参数为数组（也可能没有传入）
+        Function.prototype.apply1 = function (context, arr) {
+            var context = context || window;
+            context.fn = this;
+            var result;
+            if (!arr) {    // 第二个参数没有传参时
+                result = context.fn();
+            } else {
+                var args = [];
+                for (let i = 0, len = arr.length; i < len; i++) {
+                    args.push("arr[" + i + "]");
+                }
+                result = eval("context.fn(" + args + ")");
+            }
+            delete context.fn;
+            return result;
+        }
+        var obj = {
+            name: "jack",
+            age: 21,
+            hobbies: ["basketball", "run"],
+        }
+        function foo(name, age) {
+            console.log(name);
+            console.log(age);
+            console.log(this.hobbies);
+        }
+        foo.apply(obj, ["ammale", 23]);
+    </script>
+</body>
+
+</html>

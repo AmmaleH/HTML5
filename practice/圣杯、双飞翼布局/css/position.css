@@ -1,0 +1,20 @@
+.part2 .parent {
+    position: relative;
+}
+
+.part2 .left {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.part2 .right {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.part2 .center {
+    /* padding: 0 300px; */
+    margin: 0 300px;
+}

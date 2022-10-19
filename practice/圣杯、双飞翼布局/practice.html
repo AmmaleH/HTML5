@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三栏布局</title>
+    <style>
+        * {
+            text-align: center;
+        }
+
+        .container {
+            height: 200px;
+            width: 100%;
+            border: 3px dotted red;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        .container:nth-child(2n) {
+            border: 3px dotted black;
+        }
+
+        .introduce {
+            /* background-color: rgb(168, 235, 168); */
+            margin-bottom: 10px;
+        }
+
+        .parent {
+            height: 70%;
+            border-top: 2px dashed blue;
+        }
+
+        .left {
+            width: 300px;
+            height: 80px;
+            background-color: rgb(247, 208, 215);
+        }
+
+        .right {
+            width: 300px;
+            height: 80px;
+            background-color: rgb(182, 225, 241);
+        }
+
+        .center {
+            height: 100px;
+            background-color: rgb(209, 205, 205);
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./css/float.css" />
+    <link rel="stylesheet" type="text/css" href="./css/position.css" />
+    <link rel="stylesheet" type="text/css" href="./css/leftFloat_relative.css" />
+    <link rel="stylesheet" type="text/css" href="./css/flex.css" />
+    <link rel="stylesheet" type="text/css" href="./css/grid.css" />
+
+</head>
+
+<body>
+    <div class="container part1">
+        <div class="introduce">
+            1.用浮动实现，元素的顺序必须是左右盒子，再是中间的盒子。
+            左右盒子分别左右浮动，中间盒子设置外边距。如果三者高度相等，也可以设置内边距。
+        </div>
+        <div class="parent">
+            <div class="left">
+                <h3>左</h3>
+            </div>
+            <div class="right">
+                <h3>右</h3>
+            </div>
+            <div class="center">
+                中
+            </div>
+        </div>
+    </div>
+    <div class="container part2">
+        <div class="introduce">
+            2.用定位实现，元素的顺序无要求。
+            左右盒子分别左右定位，中间盒子设置外边距。如果三者高度相等，也可以设置内边距。
+        </div>
+        <div class="parent">
+            <div class="left">
+                <h3>左</h3>
+            </div>
+            <div class="center">
+                中
+            </div>
+            <div class="right">
+                <h3>右</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container part3">
+        <div class="introduce">
+            <b>3</b>.三个子盒子全部左浮动，元素的顺序：中间盒子放最前面。
+            再通过子盒子的相对定位和margin负值调整左右盒子的位置，注意中间盒子宽度要100%
+        </div>
+        <div class="parent">
+            <div class="center">
+                中
+            </div>
+            <div class="left">
+                <h3>左</h3>
+            </div>
+            <div class="right">
+                <h3>右</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container part4">
+        <div class="introduce">
+            <b>4</b>.flex布局
+        </div>
+        <div class="parent">
+            <div class="left">
+                <h3>左</h3>
+            </div>
+            <div class="center">
+                中
+                <span>gnisgmni<br />ksgnkejng</span>
+            </div>
+            <div class="right">
+                <h3>右</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container part5">
+        <div class="introduce">
+            <b>5</b>.grid布局
+        </div>
+        <div class="parent">
+            <div class="left">
+                <h3>左</h3>
+            </div>
+            <div class="center">
+                中
+            </div>
+            <div class="right">
+                <h3>右</h3>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch</title>
+</head>
+
+<body>
+    <button>click</button>
+    <img src="" alt="">
+
+    <div class="post">
+        <button>click</button>
+        <input type="text" placeholder="输入姓名">
+    </div>
+    <script>
+        const btn = document.querySelector("button");
+        const img = document.querySelector("img");
+        btn.addEventListener("click", () => {
+            fetch("http://dog.ceo/api/breeds/image/random")
+                .then(response => {
+                    if (response.ok) {
+                        response.json();
+                    } else {
+                        throw new Error("该交电费了");
+                    }
+                })
+                .then(data => img.src = data.message);
+        })
+
+        const btn2 = document.querySelector(".post button");
+        const input = document.querySelector(".post input");
+        btn2.addEventListener("click", () => {
+            fetch("http://jsonplaceholder.typicode.com/users", {
+                method: "post",
+                body: "JSON.stringify( {name: input.value} )",
+                headers: {
+                    "Content-type": "application/json",
+                },
+            })
+                .then(response => response.json())
+                .then(data => console.log(data));
+        })
+    </script>
+</body>
+
+</html>

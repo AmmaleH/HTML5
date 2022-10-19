@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promiseAll</title>
+</head>
+
+<body>
+    <script>
+        let p1 = Promise.all([
+            Promise.reject(),
+            new Promise((resolve, reject) => { setTimeout(resolve, 1000) })
+        ]);
+        let p2 = Promise.all([
+            Promise.resolve(1),
+            Promise.resolve(),
+            new Promise((resolve, reject) => resolve(2))
+        ]);
+        let p3 = new Promise((resolve, reject) => resolve(3));
+        // console.log(p3);
+        // setTimeout(console.log, 0, p1);
+        // setTimeout(console.log, 2000, p2);
+        // p1.then(() => setTimeout(console.log, 0, 'All promise resolved!'));
+
+        let p4 = Promise.race([
+            Promise.resolve(4),
+            new Promise((resolve, reject) => setTimeout(reject(5), 1000))
+        ]);
+        // setTimeout(console.log, 0, p4);
+
+        function addOne(x) { return x + 1; }
+        function addTwo(x) { return x + 2; }
+        function addThree(x) { return x + 3; }
+        function addFour(x) { return x + 4; }
+        function addTen(x) {
+            return [addOne, addTwo, addThree, addFour].reduce((promise, fn) => {
+                return promise.then(fn)
+            }, Promise.resolve(x));
+        }
+        addTen(8).then(console.log);
+        // 将上面的addTen提炼成一个通用函数
+        function compose(...fns) {
+            return (x) => fns.reduce((promise, fn) => {
+                return promise.then(fn);
+            }, Promise.resolve(x));
+        }
+        let addTen1 = compose(addOne, addTwo, addThree, addFour);
+        addTen1(18).then(console.log);
+        compose(addOne, addTwo, addThree)(8).then(console.log);
+    </script>
+</body>
+
+</html>

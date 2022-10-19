@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bind</title>
+</head>
+
+<body>
+    <script>
+        // bind() 模拟实现
+        // bind() 与 call()/apply() 的不同在于其不会立即执行调用它的函数
+        // bind() 接收参数和 call() 一样
+        // 注：bind() 有柯里化性质，
+        //     且 bind 可以作为构造函数，即可以使用 new 进行初始化（但此时this值会失效）
+        Function.prototype.newBind = function (context) {
+            if (typeof this !== "function") {
+                throw new Error("不是一个函数");
+            }
+            var that = this;   // 获取调用本函数的对象（函数）
+            // arguments是一个类数组，本质上还是一个对象，调用数组的原型方法需要用 call() 进行绑定
+            var args1 = Array.prototype.slice.call(arguments, 1); // 获取所有参数
+            var o = function () { };    // 原型式继承，借用一个空函数实现
+            var newF = function () {
+                var args2 = Array.prototype.slice.call(arguments);
+                var args = args1.concat(args2);
+                // 判断是否使用 new 来初始化对象
+                // 是的话把方法绑定到新的实例对象上。
+                if (this instanceof o) {
+                    that.apply(this, args);
+                } else {
+                    that.apply(context, args);
+                }
+            }
+            o.prototype = that.prototype;
+            newF.prototype = new o();
+            return newF;
+
+        }
+
+        var obj = {
+            name: "jack"
+        }
+        function foo(a, b, c) {
+            console.log(this.name);
+            console.log(a, b, c);
+        }
+        foo.prototype.collection = "集邮";
+        // foo.newBind(obj, 3, 5)(7);
+        var test = foo.newBind(obj, 23, 25);
+        var b = new test(27);
+        console.log(b.collection);
+        console.log(b.name);
+    </script>
+</body>
+
+</html>

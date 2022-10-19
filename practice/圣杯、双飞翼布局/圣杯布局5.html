@@ -27,6 +27,23 @@
         .middle {
             background: green;
         }
+
+        .center {
+            display: grid;
+            /* justify-items: center;
+            align-items: center; */
+            place-items: center center;
+            width: 200px;
+            height: 200px;
+            margin: 50px;
+            border: 1px dotted red;
+        }
+
+        .center>.child1 {
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
     </style>
 </head>
 
@@ -43,6 +60,10 @@
         <div class="right">
             <h4>右边栏</h4>
         </div>
+    </div>
+
+    <div class="center">
+        <div class="child1"></div>
     </div>
 </body>
 
